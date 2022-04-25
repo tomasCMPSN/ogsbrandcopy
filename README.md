@@ -1,4 +1,4 @@
-# OG's Brand Website Copy
+# OG's Brand Website Copy/ Bootstrap Default Style
 
 **I don't have the rights of OG's, i did this just for practice.**
 
@@ -13,6 +13,8 @@
 
 ## Dependencies:
 
+* Bootstrap
 * react-bootstrap
+* react-icons
 * react-router-dom
 * styled-components

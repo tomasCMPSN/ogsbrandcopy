@@ -43,6 +43,32 @@ const Navigation = () => {
                   <div className="lh-1 mt-4">
                     <Nav.Link
                       as={NavLink}
+                      to="/collections/the-brotherhood-collection"
+                      href="/collections/the-brotherhood-collection"
+                      className={
+                        "text-dark hoverLink" +
+                        (url === "/collections/the-brotherhood-collection"
+                          ? " text-decoration-underline"
+                          : "")
+                      }
+                    >
+                      THE BROTHERHOOD COLLETION
+                    </Nav.Link>
+                    <Nav.Link
+                      as={NavLink}
+                      to="/collections/originals"
+                      href="/collections/originals"
+                      className={
+                        "text-dark hoverLink" +
+                        (url === "/collections/originals"
+                          ? " text-decoration-underline"
+                          : "")
+                      }
+                    >
+                      OG's
+                    </Nav.Link>
+                    <Nav.Link
+                      as={NavLink}
                       to="/collections/original-gangsters-collection"
                       href="/collections/original-gangsters-collection"
                       className={
@@ -52,15 +78,15 @@ const Navigation = () => {
                           : "")
                       }
                     >
-                      ORIGINAL GANGSTERS COLLECTION
+                      ORIGINAL GANSTERS COLLECTION
                     </Nav.Link>
                     <Nav.Link
                       as={NavLink}
-                      to="/collections/basado-collection/"
-                      href="/collections/basado-collection/"
+                      to="/collections/basado-collection"
+                      href="/collections/basado-collection"
                       className={
                         "text-dark hoverLink" +
-                        (url === "/collections/basado-collection/"
+                        (url === "/collections/basado-collection"
                           ? " text-decoration-underline"
                           : "")
                       }
@@ -78,46 +104,20 @@ const Navigation = () => {
                           : "")
                       }
                     >
-                      GOLD
+                      GOLD - LAST DAYS!
                     </Nav.Link>
                     <Nav.Link
                       as={NavLink}
-                      to="/collections/originals"
-                      href="/collections/originals"
+                      to="/collections/accessories"
+                      href="/collections/accessories"
                       className={
                         "text-dark hoverLink" +
-                        (url === "/collections/originals"
+                        (url === "/collections/accessories"
                           ? " text-decoration-underline"
                           : "")
                       }
                     >
-                      OG'S
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/last-days"
-                      href="/collections/last-days"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/last-days"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      LAST DAYS!
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/browse-all"
-                      href="/collections/browse-all"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/browse-all"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      BROWSE ALL
+                      ACCESSORIES
                     </Nav.Link>
                   </div>
                   <Nav.Link

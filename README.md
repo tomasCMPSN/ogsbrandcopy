@@ -18,3 +18,4 @@
 * react-icons
 * react-router-dom
 * styled-components
+* sweetalert2

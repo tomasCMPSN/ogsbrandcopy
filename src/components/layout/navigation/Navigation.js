@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { AiOutlineShopping } from "react-icons/ai";
+import { MdAdminPanelSettings } from "react-icons/md"
 import { NavLink, useLocation } from "react-router-dom";
 import { ImgNavbar } from "./ImgNavbar";
 import { StyledLinkNavbar } from "./StyledLinkNavbar";
 import { StyledNavbar } from "./StyledNavbar";
 import { StyledOffcanvasHeader } from "./StyledOffcanvasHeader";
-import './Navigation.css'
+import "./Navigation.css";
 
 const Navigation = () => {
   const location = useLocation();
@@ -27,7 +28,7 @@ const Navigation = () => {
               placement="start"
             >
               <StyledOffcanvasHeader closeButton></StyledOffcanvasHeader>
-              <Offcanvas.Body style={{backgroundColor: "#ffcc04"}}>
+              <Offcanvas.Body style={{ backgroundColor: "#ffcc04" }}>
                 <Nav className="justify-content-end flex-grow-1 pe-3 ms-4">
                   <Nav.Link
                     as={NavLink}
@@ -142,6 +143,12 @@ const Navigation = () => {
             </NavLink>
           </Nav>
           <div>
+            <NavLink to="/admin">
+              <MdAdminPanelSettings className="fs-4 text-dark mx-2" />
+            </NavLink>
+            <StyledLinkNavbar className="me-5" to="/admin">
+              Admin
+            </StyledLinkNavbar>
             <NavLink to="/shop/cart">
               <AiOutlineShopping className="fs-4 text-dark mx-2" />
             </NavLink>

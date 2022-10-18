@@ -20,7 +20,6 @@ import CollectionsProductUpdate from "./components/views/collectionsProductUpdat
 
 function App() {
   const [collections, setCollections] = useState([]);
-  const [products, setProducts] = useState([]);
   const URLCollections = process.env.REACT_APP_API_COLLECTIONS;
   const URLProducts = process.env.REACT_APP_API_PRODUCTS;
 
@@ -34,10 +33,6 @@ function App() {
       const collectionsAPI = await resCollections.json();
       console.log(collectionsAPI);
       setCollections(collectionsAPI);
-      const resProducts = await fetch(URLProducts);
-      const productsAPI = await resProducts.json();
-      console.log(productsAPI);
-      setProducts(productsAPI)
     } catch (error) {
       console.log(error);
     }

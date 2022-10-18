@@ -1,10 +1,15 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { StyledTruncateTd } from "./StyledTruncateTd";
 
-const ProductTable = ({product, URLCollections, URLProducts, getAPI}) => {
+const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
+  const navigate = useNavigate();
+
+  const refreshPage = () => {
+    navigate(0);
+  };
 
   const handleDelete = (_id) => {
     console.log(_id);
@@ -24,8 +29,13 @@ const ProductTable = ({product, URLCollections, URLProducts, getAPI}) => {
             },
           });
           if (res.status === 200) {
-            Swal.fire("Deleted!", "Your collection has been deleted.", "success");
+            Swal.fire(
+              "Deleted!",
+              "Your collection has been deleted.",
+              "success"
+            );
             getAPI();
+            refreshPage();
           }
         } catch (error) {
           console.log(error);
@@ -40,8 +50,21 @@ const ProductTable = ({product, URLCollections, URLProducts, getAPI}) => {
       <td>{product.price}</td>
       <td>{product.colors}</td>
       <td>
-        <Button as={Link} to={`/admin/update/products/${product._id}`} variant="info" className="fw-bold w-100">UPDATE</Button>
-        <Button onClick={() => handleDelete(product._id)} variant="danger" className="fw-bold w-100 mt-1">DELETE</Button>
+        <Button
+          as={Link}
+          to={`/admin/update/products/${product._id}`}
+          variant="info"
+          className="fw-bold w-100"
+        >
+          UPDATE
+        </Button>
+        <Button
+          onClick={() => handleDelete(product._id)}
+          variant="danger"
+          className="fw-bold w-100 mt-1"
+        >
+          DELETE
+        </Button>
       </td>
       <StyledTruncateTd className="text-truncate">
         {product.color1Img1}

@@ -5,6 +5,12 @@ import { StyledResponsiveTitle } from "../../layout/navigation/StyledResponsiveT
 import { StyledContainerImage } from "./StyledContainerImage";
 
 const Home = () => {
+
+  const home1 = {src: "https://ogsbrand.storage.googleapis.com/media/images/Copy_of_OGS_Spring22_Web2.2e16d0ba.fill-700x930-c100.jpg",
+                alt: "THE BROTHERHOOD COLLECTION"}
+  console.log(home1.src);
+  console.log(home1.alt);
+
   return (
     <Container fluid={true}>
       <Row className="mx-1 mx-lg-5" style={{ marginTop: "16vh" }}>

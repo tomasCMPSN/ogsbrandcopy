@@ -127,6 +127,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
           <Form.Control
             type="text"
             placeholder="Enter name"
+            required={true}
             onChange={(e) => setName(e.target.value)}
           />
         </Form.Group>
@@ -135,6 +136,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
           <Form.Control
             type="number"
             placeholder="Enter price"
+            required={true}
             onChange={(e) => setPrice(e.target.value)}
           />
         </Form.Group>
@@ -143,6 +145,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
           <Form.Control
             type="number"
             placeholder="Enter colors quantity. Max 3"
+            required={true}
             onChange={(e) => setColors(e.target.value)}
           />
         </Form.Group>
@@ -151,6 +154,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
           <Form.Control
             type="url"
             placeholder="Enter image URL"
+            required={true}
             onChange={(e) => setColor1Img1(e.target.value)}
           />
         </Form.Group>

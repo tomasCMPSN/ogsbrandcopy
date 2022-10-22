@@ -124,6 +124,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Control
             type="text"
             defaultValue={product.name}
+            required={true}
             ref={productNameRef}
           />
         </Form.Group>
@@ -132,6 +133,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Control
             type="number"
             defaultValue={product.price}
+            required={true}
             ref={productPriceRef}
           />
         </Form.Group>
@@ -140,6 +142,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Control
             type="number"
             defaultValue={product.colors}
+            required={true}
             ref={productColorsRef}
           />
         </Form.Group>
@@ -148,6 +151,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Control
             type="url"
             defaultValue={product.color1Img1}
+            required={true}
             ref={productColor1Img1Ref}
           />
         </Form.Group>

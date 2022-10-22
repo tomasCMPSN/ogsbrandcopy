@@ -82,7 +82,7 @@ const CollectionsUpdate = ({ URLCollections, getAPI }) => {
       <StyledForm onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formTitle">
           <Form.Label className="fw-bold fs-3">TITLE</Form.Label>
-          <Form.Control type="text" defaultValue={collection.title} ref={collectionTitleRef} />
+          <Form.Control type="text" required={true} defaultValue={collection.title} ref={collectionTitleRef} />
         </Form.Group>
         <div>
           <Button type="submit" variant="info w-100">UPDATE</Button>

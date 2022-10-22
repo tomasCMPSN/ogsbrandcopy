@@ -6,10 +6,10 @@ import { StyledContainerImage } from "./StyledContainerImage";
 
 const Home = () => {
 
-  const home1 = {src: "https://ogsbrand.storage.googleapis.com/media/images/Copy_of_OGS_Spring22_Web2.2e16d0ba.fill-700x930-c100.jpg",
-                alt: "THE BROTHERHOOD COLLECTION"}
-  console.log(home1.src);
-  console.log(home1.alt);
+  const homeData = [{collectionName: "THE NEW COLLECTION", img: "link de la foto", link: "link.com"}, {collectionName: "THE NEW COLLECTION333", img: "link de la foto33", link: "link.com33"}]
+
+  console.log(homeData[0].img);
+  console.log(homeData[1].img);
 
   return (
     <Container fluid={true}>

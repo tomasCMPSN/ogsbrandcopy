@@ -17,7 +17,7 @@ const Home = () => {
         <Col xs={12} lg={6}>
           <Link
             style={{ textDecoration: "none" }}
-            to="/collections/the-brotherhood-collection"
+            to="/collections"
           >
             <StyledContainerImage>
               <Image
@@ -122,22 +122,22 @@ const Home = () => {
           </Link>
         </Col>
         <Col className="mt-4" xs={12} lg={3}>
-          <Link style={{ textDecoration: "none" }} to="/collections/accessories">
+          <Link style={{ textDecoration: "none" }} to="/collections">
             <StyledContainerImage>
               <Image
                 fluid={true}
                 src="https://ogsbrand.storage.googleapis.com/media/images/brand.ogs_247523086_397034392.2e16d0ba.fill-700x930-c100.jpg"
-                alt="ACCESSORIES"
+                alt="BROWSE ALL"
                 className="d-block mx-auto"
               />
               <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
                 <div className="fw-bold text-center text-dark fs-2">
-                  ACCESSORIES
+                  BROWSE ALL
                 </div>
               </StyledContainerImage>
             </StyledContainerImage>
             <StyledResponsiveTitle className="mt-4 fs-5">
-              ACCESSORIES
+              BROWSE ALL
             </StyledResponsiveTitle>
           </Link>
         </Col>

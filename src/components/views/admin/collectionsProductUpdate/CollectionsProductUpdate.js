@@ -3,7 +3,7 @@ import { useRef } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { validateCollectionName, validateColor, validatePrice, validateURL } from "../../helpers/ValidateFields";
+import { validateCollectionName, validateColor, validatePrice, validateURL } from "../../../helpers/ValidateFields";
 import { StyledForm } from "../collectionsCreate/StyledForm";
 
 const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {

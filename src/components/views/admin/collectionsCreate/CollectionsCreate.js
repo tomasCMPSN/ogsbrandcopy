@@ -3,11 +3,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { Button, Container, Form } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { validateCollectionName } from "../../helpers/ValidateFields";
+import { validateCollectionName } from "../../../helpers/ValidateFields";
 import { StyledForm } from "./StyledForm";
 
 const CollectionsCreate = ({ URLCollections, getAPI }) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState("")
 
   const navigate = useNavigate()
 

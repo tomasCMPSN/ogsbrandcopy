@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { StyledForm } from "../collectionsCreate/StyledForm";
-import { validateCollectionName } from "../../helpers/ValidateFields";
+import { validateCollectionName } from "../../../helpers/ValidateFields";
 import Swal from "sweetalert2";
 
 const CollectionsUpdate = ({ URLCollections, getAPI }) => {

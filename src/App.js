@@ -13,13 +13,15 @@ import OriginalGangstersCollection from "./components/views/collections/original
 import Home from "./components/views/home/Home";
 import Admin from "./components/views/admin/Admin";
 import Error404 from "./components/views/error404/Error404";
-import CollectionsCreate from "./components/views/collectionsCreate/CollectionsCreate";
-import CollectionsUpdate from "./components/views/collectionsUpdate/CollectionsUpdate";
-import CollectionsProductCreate from "./components/views/collectionsProductCreate/CollectionsProductCreate";
-import CollectionsProductUpdate from "./components/views/collectionsProductUpdate/CollectionsProductUpdate";
+import CollectionsCreate from "./components/views/admin/collectionsCreate/CollectionsCreate";
+import CollectionsUpdate from "./components/views/admin/collectionsUpdate/CollectionsUpdate";
+import CollectionsProductCreate from "./components/views/admin/collectionsProductCreate/CollectionsProductCreate";
+import CollectionsProductUpdate from "./components/views/admin/collectionsProductUpdate/CollectionsProductUpdate";
+import AllCollections from "./components/views/collections/AllCollections";
 
 function App() {
   const [collections, setCollections] = useState([]);
+  const [products, setProducts] = useState([]);
   const URLCollections = process.env.REACT_APP_API_COLLECTIONS;
   const URLProducts = process.env.REACT_APP_API_PRODUCTS;
 
@@ -33,6 +35,10 @@ function App() {
       const collectionsAPI = await resCollections.json();
       console.log(collectionsAPI);
       setCollections(collectionsAPI);
+      const resProducts = await fetch(URLProducts);
+      const productsAPI = await resProducts.json();
+      console.log(productsAPI);
+      setProducts(productsAPI)
     } catch (error) {
       console.log(error);
     }
@@ -69,6 +75,7 @@ function App() {
               element={<Accessories />}
             />
             <Route exact path="/shop/cart" element={<Cart />} />
+            <Route exact path="/collections" element={<AllCollections products={products} />} />
             <Route
               exact
               path="/admin"

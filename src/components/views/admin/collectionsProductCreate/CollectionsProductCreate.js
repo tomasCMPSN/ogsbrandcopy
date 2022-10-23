@@ -7,7 +7,7 @@ import {
   validateColor,
   validatePrice,
   validateURL,
-} from "../../helpers/ValidateFields";
+} from "../../../helpers/ValidateFields";
 import { StyledForm } from "../collectionsCreate/StyledForm";
 
 const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {

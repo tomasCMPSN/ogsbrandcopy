@@ -13,7 +13,7 @@ const Home = ({ homeData }) => {
     <Container fluid={true}>
       <Row className="mx-1 mx-lg-5" style={{ marginTop: "16vh" }}>
         <Col xs={12} lg={6}>
-          <Link style={{ textDecoration: "none" }} to="/collections">
+          <Link style={{ textDecoration: "none" }} to={"/collections/" + homeData[0].collectionid}>
             <StyledContainerImage>
               <Image
                 fluid={true}
@@ -33,7 +33,7 @@ const Home = ({ homeData }) => {
           </Link>
         </Col>
         <Col xs={12} lg={6}>
-          <Link style={{ textDecoration: "none" }} to="/collections/originals">
+          <Link style={{ textDecoration: "none" }} to={"/collections/" + homeData[1].collectionid}>
             <StyledContainerImage>
               <Image
                 fluid={true}
@@ -55,7 +55,7 @@ const Home = ({ homeData }) => {
         <Col className="mt-4" xs={12} lg={3}>
           <Link
             style={{ textDecoration: "none" }}
-            to="/collections/original-gangsters-collection"
+            to={"/collections/" + homeData[2].collectionid}
           >
             <StyledContainerImage>
               <Image
@@ -78,7 +78,7 @@ const Home = ({ homeData }) => {
         <Col className="mt-4" xs={12} lg={3}>
           <Link
             style={{ textDecoration: "none" }}
-            to="/collections/basado-collection"
+            to={"/collections/" + homeData[3].collectionid}
           >
             <StyledContainerImage>
               <Image
@@ -99,7 +99,7 @@ const Home = ({ homeData }) => {
           </Link>
         </Col>
         <Col className="mt-4" xs={12} lg={3}>
-          <Link style={{ textDecoration: "none" }} to="/collections/ogs">
+          <Link style={{ textDecoration: "none" }} to={"/collections/" + homeData[4].collectionid}>
             <StyledContainerImage>
               <Image
                 fluid={true}

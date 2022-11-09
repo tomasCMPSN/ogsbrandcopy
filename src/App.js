@@ -17,9 +17,10 @@ import CollectionsCreate from "./components/views/admin/collectionsCreate/Collec
 import CollectionsUpdate from "./components/views/admin/collectionsUpdate/CollectionsUpdate";
 import CollectionsProductCreate from "./components/views/admin/collectionsProductCreate/CollectionsProductCreate";
 import CollectionsProductUpdate from "./components/views/admin/collectionsProductUpdate/CollectionsProductUpdate";
-import AllCollections from "./components/views/collections/AllCollections";
 import HomeDataUpdate from "./components/views/admin/homeDataUpdate/HomeDataUpdate";
 import HomeDataCreate from "./components/views/admin/homeDataCreate/HomeDataCreate";
+import AllCollections from "./components/views/collections/AllCollections/AllCollections";
+import Collection from "./components/views/collections/Collection/Collection";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -84,6 +85,7 @@ function App() {
             />
             <Route exact path="/shop/cart" element={<Cart />} />
             <Route exact path="/collections" element={<AllCollections products={products} />} />
+            <Route exact path="/collections/:id" element={<Collection /> }/>
             <Route
               exact
               path="/admin"

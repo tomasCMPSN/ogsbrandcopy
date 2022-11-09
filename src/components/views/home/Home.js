@@ -4,120 +4,117 @@ import { Link } from "react-router-dom";
 import { StyledResponsiveTitle } from "../../layout/navigation/StyledResponsiveTitle";
 import { StyledContainerImage } from "./StyledContainerImage";
 
-const Home = () => {
-
-  const homeData = [{collectionName: "THE NEW COLLECTION", img: "link de la foto", link: "link.com"}, {collectionName: "THE NEW COLLECTION333", img: "link de la foto33", link: "link.com33"}]
-
-  console.log(homeData[0].img);
-  console.log(homeData[1].img);
+const Home = ({ homeData }) => {
+  if (homeData.length !== 5) {
+    return <p style={{ marginTop: "16vh" }}>Loading.</p>;
+  }
 
   return (
     <Container fluid={true}>
       <Row className="mx-1 mx-lg-5" style={{ marginTop: "16vh" }}>
         <Col xs={12} lg={6}>
-          <Link
-            style={{ textDecoration: "none" }}
-            to="/collections"
-          >
+          <Link style={{ textDecoration: "none" }} to="/collections">
             <StyledContainerImage>
               <Image
                 fluid={true}
-                src="https://ogsbrand.storage.googleapis.com/media/images/Copy_of_OGS_Spring22_Web2.2e16d0ba.fill-700x930-c100.jpg"
-                alt="THE BROTHERHOOD COLLECTION"
+                src={homeData[0].imgURL}
+                alt={homeData[0].title}
                 className="d-block mx-auto"
               />
               <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
                 <div className="fw-bold text-center text-dark fs-2">
-                  THE BROTHERHOOD COLLECTION
+                  {homeData[0].title}
                 </div>
               </StyledContainerImage>
             </StyledContainerImage>
             <StyledResponsiveTitle className="mt-4 mb-3 fs-5">
-              THE BROTHERHOOD COLLECTION
+              {homeData[0].title}
             </StyledResponsiveTitle>
           </Link>
         </Col>
         <Col xs={12} lg={6}>
-          <Link
-            style={{ textDecoration: "none" }}
-            to="/collections/originals"
-          >
+          <Link style={{ textDecoration: "none" }} to="/collections/originals">
             <StyledContainerImage>
               <Image
                 fluid={true}
-                src="https://ogsbrand.storage.googleapis.com/media/images/Clasica.2e16d0ba.fill-700x930-c100.jpg"
-                alt="OG's"
-                className="d-block mx-auto"
-              />
-              <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
-                <div className="fw-bold text-center text-dark fs-2">OG's</div>
-              </StyledContainerImage>
-            </StyledContainerImage>
-            <StyledResponsiveTitle className="mt-4 fs-5">
-              OG's
-            </StyledResponsiveTitle>
-          </Link>
-        </Col>
-        <Col className="mt-4" xs={12} lg={3}>
-          <Link style={{ textDecoration: "none" }} to="/collections/original-gangsters-collection">
-            <StyledContainerImage>
-              <Image
-                fluid={true}
-                src="https://ogsbrand.storage.googleapis.com/media/images/OGs_Original_Gangsters_WHITE_.2e16d0ba.fill-700x930-c100.png"
-                alt="ORIGINAL GANGSTERS COLLECTION"
+                src={homeData[1].imgURL}
+                alt={homeData[1].title}
                 className="d-block mx-auto"
               />
               <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
                 <div className="fw-bold text-center text-dark fs-2">
-                  ORIGINAL GANGSTERS COLLECTION
+                  {homeData[1].title}
                 </div>
               </StyledContainerImage>
             </StyledContainerImage>
             <StyledResponsiveTitle className="mt-4 fs-5">
-              ORIGINAL GANGSTERS COLLECTION
-            </StyledResponsiveTitle>
-          </Link>
-        </Col>
-        <Col className="mt-4" xs={12} lg={3}>
-          <Link style={{ textDecoration: "none" }} to="/collections/basado-collection">
-            <StyledContainerImage>
-              <Image
-                fluid={true}
-                src="https://ogsbrand.storage.googleapis.com/media/images/OGS_BasedDepartment_Ilustraci.2e16d0ba.fill-700x930-c100.png"
-                alt="BASADO COLLECTION"
-                className="d-block mx-auto"
-              />
-              <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
-                <div className="fw-bold text-center text-dark fs-2">
-                  BASADO COLLECTION
-                </div>
-              </StyledContainerImage>
-            </StyledContainerImage>
-            <StyledResponsiveTitle className="mt-4 fs-5">
-              BASADO COLLECTION
+              {homeData[1].title}
             </StyledResponsiveTitle>
           </Link>
         </Col>
         <Col className="mt-4" xs={12} lg={3}>
           <Link
             style={{ textDecoration: "none" }}
-            to="/collections/ogs"
+            to="/collections/original-gangsters-collection"
           >
             <StyledContainerImage>
               <Image
                 fluid={true}
-                src="https://ogsbrand.storage.googleapis.com/media/images/Dorada.2e16d0ba.fill-700x930-c100.jpg"
-                alt="GOLD - LAST DAYS!"
+                src={homeData[2].imgURL}
+                alt={homeData[2].title}
                 className="d-block mx-auto"
               />
               <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
                 <div className="fw-bold text-center text-dark fs-2">
-                  GOLD - LAST DAYS!
+                  {homeData[2].title}
                 </div>
               </StyledContainerImage>
             </StyledContainerImage>
             <StyledResponsiveTitle className="mt-4 fs-5">
-              GOLD - LAST DAYS!
+              {homeData[2].title}
+            </StyledResponsiveTitle>
+          </Link>
+        </Col>
+        <Col className="mt-4" xs={12} lg={3}>
+          <Link
+            style={{ textDecoration: "none" }}
+            to="/collections/basado-collection"
+          >
+            <StyledContainerImage>
+              <Image
+                fluid={true}
+                src={homeData[3].imgURL}
+                alt={homeData[3].title}
+                className="d-block mx-auto"
+              />
+              <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
+                <div className="fw-bold text-center text-dark fs-2">
+                  {homeData[3].title}
+                </div>
+              </StyledContainerImage>
+            </StyledContainerImage>
+            <StyledResponsiveTitle className="mt-4 fs-5">
+              {homeData[3].title}
+            </StyledResponsiveTitle>
+          </Link>
+        </Col>
+        <Col className="mt-4" xs={12} lg={3}>
+          <Link style={{ textDecoration: "none" }} to="/collections/ogs">
+            <StyledContainerImage>
+              <Image
+                fluid={true}
+                src={homeData[4].imgURL}
+                alt={homeData[4].title}
+                className="d-block mx-auto"
+              />
+              <StyledContainerImage className="overlay justify-content-center align-items-center d-flex">
+                <div className="fw-bold text-center text-dark fs-2">
+                  {homeData[4].title}
+                </div>
+              </StyledContainerImage>
+            </StyledContainerImage>
+            <StyledResponsiveTitle className="mt-4 fs-5">
+              {homeData[4].title}
             </StyledResponsiveTitle>
           </Link>
         </Col>

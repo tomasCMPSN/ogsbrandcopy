@@ -18,12 +18,16 @@ import CollectionsUpdate from "./components/views/admin/collectionsUpdate/Collec
 import CollectionsProductCreate from "./components/views/admin/collectionsProductCreate/CollectionsProductCreate";
 import CollectionsProductUpdate from "./components/views/admin/collectionsProductUpdate/CollectionsProductUpdate";
 import AllCollections from "./components/views/collections/AllCollections";
+import HomeDataUpdate from "./components/views/admin/homeDataUpdate/HomeDataUpdate";
+import HomeDataCreate from "./components/views/admin/homeDataCreate/HomeDataCreate";
 
 function App() {
   const [collections, setCollections] = useState([]);
   const [products, setProducts] = useState([]);
+  const [homeData, setHomeData] = useState([]);
   const URLCollections = process.env.REACT_APP_API_COLLECTIONS;
   const URLProducts = process.env.REACT_APP_API_PRODUCTS;
+  const URLHomeData = process.env.REACT_APP_API_HOMEDATA;
 
   useEffect(() => {
     getAPI();
@@ -39,11 +43,15 @@ function App() {
       const productsAPI = await resProducts.json();
       console.log(productsAPI);
       setProducts(productsAPI)
+      const resHomeData = await fetch(URLHomeData);
+      const homeDataAPI = await resHomeData.json();
+      console.log(homeDataAPI);
+      setHomeData(homeDataAPI)
     } catch (error) {
       console.log(error);
     }
   }
-
+  
   return (
     <div>
       <GlobalFonts />
@@ -51,7 +59,7 @@ function App() {
         <Navigation />
         <main>
           <Routes>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/" element={<Home homeData={homeData} />} />
             <Route
               exact
               path="/collections/original-gangsters-collection"
@@ -79,12 +87,14 @@ function App() {
             <Route
               exact
               path="/admin"
-              element={<Admin URLCollections={URLCollections} URLProducts={URLProducts} collections={collections} getAPI={getAPI} />}
+              element={<Admin URLCollections={URLCollections} URLProducts={URLProducts} URLHomeData={URLHomeData} homeData={homeData} collections={collections} getAPI={getAPI} />}
             />
             <Route exact path="/admin/create" element={<CollectionsCreate URLCollections={URLCollections} getAPI={getAPI} />} />
             <Route exact path="/admin/:id/create" element={ <CollectionsProductCreate  URLCollections={URLCollections} URLProducts={URLProducts} getAPI={getAPI} /> } />
+            <Route exact path="/admin/create/homedata" element={ <HomeDataCreate collections={collections} URLCollections={URLCollections} URLHomeData={URLHomeData} getAPI={getAPI} /> } />
             <Route exact path="/admin/update/:id" element={ <CollectionsUpdate URLCollections={URLCollections} getAPI={getAPI} /> } />
             <Route exact path="/admin/update/products/:id" element={ <CollectionsProductUpdate URLProducts={URLProducts} getAPI={getAPI} /> } />
+            <Route exact path="/admin/update/homedata/:id" element={ <HomeDataUpdate URLCollections={URLCollections} URLHomeData={URLHomeData} collections={collections} getAPI={getAPI} /> } />
             <Route exact path="*" element={<Error404 />} />
           </Routes>
         </main>

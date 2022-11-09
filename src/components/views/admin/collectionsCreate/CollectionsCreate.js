@@ -58,7 +58,7 @@ const CollectionsCreate = ({ URLCollections, getAPI }) => {
       </div>
       <StyledForm onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formTitle">
-          <Form.Label className="fw-bold fs-3">TITLE</Form.Label>
+          <Form.Label className="fw-bold fs-3">TITLE*</Form.Label>
           <Form.Control type="text" placeholder="Enter title" onChange={(e) => setTitle(e.target.value)} />
         </Form.Group>
         <div>

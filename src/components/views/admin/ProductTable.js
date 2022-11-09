@@ -46,9 +46,6 @@ const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
 
   return (
     <tr>
-      <td>{product.name}</td>
-      <td>{product.price}</td>
-      <td>{product.colors}</td>
       <td>
         <Button
           as={Link}
@@ -66,6 +63,9 @@ const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
           DELETE
         </Button>
       </td>
+      <td>{product.name}</td>
+      <td>{product.price}</td>
+      <td>{product.colors}</td>
       <StyledTruncateTd className="text-truncate">
         {product.color1Img1}
       </StyledTruncateTd>

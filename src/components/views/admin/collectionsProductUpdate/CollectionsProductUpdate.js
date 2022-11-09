@@ -268,7 +268,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           />
         </Form.Group>
         <div>
-          <Button type="submit" variant="info w-100">UPDATE</Button>
+          <Button type="submit" variant="info fw-bold w-100">UPDATE</Button>
         </div>
       </StyledForm>
     </Container>

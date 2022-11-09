@@ -64,10 +64,10 @@ const AdminTable = ({collection, URLCollections, URLProducts, getAPI}) => {
       <Table responsive striped bordered hover>
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Price €</th>
-            <th>Colors</th>
             <th>Actions</th>
+            <th>Name</th>
+            <th className="text-nowrap">Price €</th>
+            <th>Colors</th>
             <th>C1I1</th>
             <th>C1I2</th>
             <th>C1I3</th>

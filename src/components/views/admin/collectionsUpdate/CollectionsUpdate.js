@@ -85,7 +85,7 @@ const CollectionsUpdate = ({ URLCollections, getAPI }) => {
           <Form.Control type="text" required={true} defaultValue={collection.title} ref={collectionTitleRef} />
         </Form.Group>
         <div>
-          <Button type="submit" variant="info w-100">UPDATE</Button>
+          <Button type="submit" variant="info fw-bold w-100">UPDATE</Button>
         </div>
       </StyledForm>
     </Container>

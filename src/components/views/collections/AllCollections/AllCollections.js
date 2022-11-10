@@ -6,8 +6,8 @@ const AllCollections = ({ products }) => {
   console.log(products);
   return (
     <Container style={{ marginTop: "16vh" }}>
-      <div className="text-center">
-        <h1>ALL PRODUCTS</h1>
+      <div className="text-center pt-lg-5 pb-4">
+        <h1 className="fw-bold">BROWSE ALL</h1>
       </div>
       <Row className="mx-1 mx-lg-5">
         {products.map((product) => (

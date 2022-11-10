@@ -132,6 +132,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Label className="fw-bold fs-3">PRICE*</Form.Label>
           <Form.Control
             type="number"
+            step="0.01"
             defaultValue={product.price}
             required={true}
             ref={productPriceRef}
@@ -141,6 +142,8 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Label className="fw-bold fs-3">COLORS*</Form.Label>
           <Form.Control
             type="number"
+            min="1"
+            max="3"
             defaultValue={product.colors}
             required={true}
             ref={productColorsRef}

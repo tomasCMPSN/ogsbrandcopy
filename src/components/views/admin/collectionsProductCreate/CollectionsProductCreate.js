@@ -135,6 +135,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
           <Form.Label className="fw-bold fs-3">PRICE*</Form.Label>
           <Form.Control
             type="number"
+            step="0.01"
             placeholder="Enter price"
             required={true}
             onChange={(e) => setPrice(e.target.value)}

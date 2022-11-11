@@ -4,12 +4,6 @@ import GlobalFonts from "./fonts/fonts";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navigation from "./components/layout/navigation/Navigation";
 import Cart from "./components/views/cart/Cart";
-import Accessories from "./components/views/collections/accesories/Accessories";
-import BasadoCollection from "./components/views/collections/basadoCollection/BasadoCollection";
-import TheBrotherhoodCollection from "./components/views/collections/theBrotherhoodCollection/TheBrotherhoodCollection";
-import Gold from "./components/views/collections/gold/Gold";
-import Ogs from "./components/views/collections/ogs/Ogs";
-import OriginalGangstersCollection from "./components/views/collections/originalGangstersCollection/OriginalGangstersCollection";
 import Home from "./components/views/home/Home";
 import Admin from "./components/views/admin/Admin";
 import Error404 from "./components/views/error404/Error404";
@@ -21,6 +15,7 @@ import HomeDataUpdate from "./components/views/admin/homeDataUpdate/HomeDataUpda
 import HomeDataCreate from "./components/views/admin/homeDataCreate/HomeDataCreate";
 import AllCollections from "./components/views/collections/AllCollections/AllCollections";
 import Collection from "./components/views/collections/Collection/Collection";
+import Product from "./components/views/product/Product";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -43,16 +38,16 @@ function App() {
       const resProducts = await fetch(URLProducts);
       const productsAPI = await resProducts.json();
       console.log(productsAPI);
-      setProducts(productsAPI)
+      setProducts(productsAPI);
       const resHomeData = await fetch(URLHomeData);
       const homeDataAPI = await resHomeData.json();
       console.log(homeDataAPI);
-      setHomeData(homeDataAPI)
+      setHomeData(homeDataAPI);
     } catch (error) {
       console.log(error);
     }
-  }
-  
+  };
+
   return (
     <div>
       <GlobalFonts />
@@ -60,44 +55,95 @@ function App() {
         <Navigation />
         <main>
           <Routes>
-            <Route exact path="/" element={<Home homeData={homeData} />} />
+            <Route path="/" element={<Home homeData={homeData} />} />
+            <Route path="/shop/cart" element={<Cart />} />
             <Route
-              exact
-              path="/collections/original-gangsters-collection"
-              element={<OriginalGangstersCollection />}
+              path="/collections"
+              element={<AllCollections products={products} />}
             />
             <Route
-              exact
-              path="/collections/basado-collection"
-              element={<BasadoCollection />}
+              path="/collections/:id"
+              element={
+                <Collection
+                  URLProducts={URLProducts}
+                  URLCollections={URLCollections}
+                />
+              }
             />
-            <Route exact path="/collections/ogs" element={<Gold />} />
-            <Route exact path="/collections/originals" element={<Ogs />} />
+            <Route path="/collections/:id/:id" element={<Product />} /> 
             <Route
-              exact
-              path="/collections/the-brotherhood-collection"
-              element={<TheBrotherhoodCollection />}
-            />
-            <Route
-              exact
-              path="/collections/accessories"
-              element={<Accessories />}
-            />
-            <Route exact path="/shop/cart" element={<Cart />} />
-            <Route exact path="/collections" element={<AllCollections products={products} />} />
-            <Route exact path="/collections/:id" element={<Collection /> }/>
-            <Route
-              exact
               path="/admin"
-              element={<Admin URLCollections={URLCollections} URLProducts={URLProducts} URLHomeData={URLHomeData} homeData={homeData} collections={collections} getAPI={getAPI} />}
+              element={
+                <Admin
+                  URLCollections={URLCollections}
+                  URLProducts={URLProducts}
+                  URLHomeData={URLHomeData}
+                  homeData={homeData}
+                  collections={collections}
+                  getAPI={getAPI}
+                />
+              }
             />
-            <Route exact path="/admin/create" element={<CollectionsCreate URLCollections={URLCollections} getAPI={getAPI} />} />
-            <Route exact path="/admin/:id/create" element={ <CollectionsProductCreate  URLCollections={URLCollections} URLProducts={URLProducts} getAPI={getAPI} /> } />
-            <Route exact path="/admin/create/homedata" element={ <HomeDataCreate collections={collections} URLCollections={URLCollections} URLHomeData={URLHomeData} getAPI={getAPI} /> } />
-            <Route exact path="/admin/update/:id" element={ <CollectionsUpdate URLCollections={URLCollections} getAPI={getAPI} /> } />
-            <Route exact path="/admin/update/products/:id" element={ <CollectionsProductUpdate URLProducts={URLProducts} getAPI={getAPI} /> } />
-            <Route exact path="/admin/update/homedata/:id" element={ <HomeDataUpdate URLCollections={URLCollections} URLHomeData={URLHomeData} collections={collections} getAPI={getAPI} /> } />
-            <Route exact path="*" element={<Error404 />} />
+            <Route
+              path="/admin/create"
+              element={
+                <CollectionsCreate
+                  URLCollections={URLCollections}
+                  getAPI={getAPI}
+                />
+              }
+            />
+            <Route
+              path="/admin/:id/create"
+              element={
+                <CollectionsProductCreate
+                  URLCollections={URLCollections}
+                  URLProducts={URLProducts}
+                  getAPI={getAPI}
+                />
+              }
+            />
+            <Route
+              path="/admin/create/homedata"
+              element={
+                <HomeDataCreate
+                  collections={collections}
+                  URLCollections={URLCollections}
+                  URLHomeData={URLHomeData}
+                  getAPI={getAPI}
+                />
+              }
+            />
+            <Route
+              path="/admin/update/:id"
+              element={
+                <CollectionsUpdate
+                  URLCollections={URLCollections}
+                  getAPI={getAPI}
+                />
+              }
+            />
+            <Route
+              path="/admin/update/products/:id"
+              element={
+                <CollectionsProductUpdate
+                  URLProducts={URLProducts}
+                  getAPI={getAPI}
+                />
+              }
+            />
+            <Route
+              path="/admin/update/homedata/:id"
+              element={
+                <HomeDataUpdate
+                  URLCollections={URLCollections}
+                  URLHomeData={URLHomeData}
+                  collections={collections}
+                  getAPI={getAPI}
+                />
+              }
+            />
+            <Route path="*" element={<Error404 />} />
           </Routes>
         </main>
       </BrowserRouter>

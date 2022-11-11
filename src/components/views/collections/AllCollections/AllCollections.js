@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import AllCollectionsGrid from "./AllCollectionsGrid";
+import CollectionsGrid from "../CollectionsGrid";
 
 const AllCollections = ({ products }) => {
   console.log(products);
@@ -11,7 +11,7 @@ const AllCollections = ({ products }) => {
       </div>
       <Row className="mx-1 mx-lg-5">
         {products.map((product) => (
-          <AllCollectionsGrid product={product} key={product._id} />
+          <CollectionsGrid product={product} key={product._id} />
         ))}
       </Row>
     </Container>

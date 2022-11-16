@@ -80,7 +80,24 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       color3Img5: productColor3Img5Ref.current.value,
       collectionid: product.collectionid
     }
+
+    if (productUpdated.colors === "2" && productUpdated.color2Img1 === "") {
+      Swal.fire("Oops...", "Color 2 image 1 for 2 colors", "error");
+      return;
+    }
+
+    if (productUpdated.colors === "3" && productUpdated.color3Img1 === "") {
+      Swal.fire("Oops...", "Color 3 image 1  and color 2 image 1 are necessary for 3 colors", "error");
+      return;
+    }
+
+    if (productUpdated.colors === "3" && productUpdated.color2Img1 === "") {
+      Swal.fire("Oops...", "Color 2 image 1 is necessary too for 3 colors", "error");
+      return;
+    }
     
+    console.log(productUpdated)
+
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",

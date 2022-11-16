@@ -70,7 +70,7 @@ function App() {
                 />
               }
             />
-            <Route path="/collections/:id/:id" element={<Product />} /> 
+            <Route path="/collections/:id/:id" element={<Product URLProducts={URLProducts} />} /> 
             <Route
               path="/admin"
               element={

@@ -16,12 +16,12 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
 
   console.log(collection._id);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [colors, setColors] = useState(0);
-  const collectionid = collection._id
+  const collectionid = collection._id;
 
   const [color1Img1, setColor1Img1] = useState("");
   const [color1Img2, setColor1Img2] = useState("");
@@ -61,7 +61,23 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
       !validateColor(colors) ||
       !validateURL(color1Img1)
     ) {
-      Swal.fire("Oops...", "Something went wrong!", "error")
+      Swal.fire("Oops...", "Invalid validation.", "error");
+      return;
+    }
+
+    if (colors === "2" && color2Img1 === "") {
+      Swal.fire("Oops...", "Color 2 image 1 for 2 colors", "error");
+      return;
+    }
+
+    if (colors === "3" && color3Img1 === "") {
+      Swal.fire("Oops...", "Color 3 image 1  and color 2 image 1 are necessary for 3 colors", "error");
+      return;
+    }
+
+    if (colors === "3" && color2Img1 === "") {
+      Swal.fire("Oops...", "Color 2 image 1 is necessary too for 3 colors", "error");
+      return;
     }
 
     const newProduct = {
@@ -100,12 +116,16 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
           const res = await fetch(URLProducts, {
             method: "POST",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(newProduct)
+            body: JSON.stringify(newProduct),
           });
-          if(res.status === 201){
-            Swal.fire("Created!", "Your new product has been created.", "success");
+          if (res.status === 201) {
+            Swal.fire(
+              "Created!",
+              "Your new product has been created.",
+              "success"
+            );
             getAPI();
             navigate("/admin");
           }

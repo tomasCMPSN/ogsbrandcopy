@@ -3,7 +3,12 @@ import { useRef } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { validateCollectionName, validateColor, validatePrice, validateURL } from "../../../helpers/ValidateFields";
+import {
+  validateCollectionName,
+  validateColor,
+  validatePrice,
+  validateURL,
+} from "../../../helpers/ValidateFields";
 import { StyledForm } from "../collectionsCreate/StyledForm";
 
 const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
@@ -15,6 +20,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
   const productNameRef = useRef("");
   const productPriceRef = useRef("");
   const productColorsRef = useRef("");
+  const productDescriptionRef = useRef("");
   const productColor1Img1Ref = useRef("");
   const productColor1Img2Ref = useRef("");
   const productColor1Img3Ref = useRef("");
@@ -48,7 +54,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
   }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     if (
       !validateCollectionName(productNameRef.current.value) ||
@@ -56,13 +62,14 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       !validateColor(productColorsRef.current.value) ||
       !validateURL(productColor1Img1Ref.current.value)
     ) {
-      Swal.fire("Oops...", "Something went wrong!", "error")
+      Swal.fire("Oops...", "Something went wrong!", "error");
     }
 
     const productUpdated = {
       name: productNameRef.current.value,
       price: productPriceRef.current.value,
       colors: productColorsRef.current.value,
+      description: productDescriptionRef.current.value,
       color1Img1: productColor1Img1Ref.current.value,
       color1Img2: productColor1Img2Ref.current.value,
       color1Img3: productColor1Img3Ref.current.value,
@@ -78,8 +85,8 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       color3Img3: productColor3Img3Ref.current.value,
       color3Img4: productColor3Img4Ref.current.value,
       color3Img5: productColor3Img5Ref.current.value,
-      collectionid: product.collectionid
-    }
+      collectionid: product.collectionid,
+    };
 
     if (productUpdated.colors === "2" && productUpdated.color2Img1 === "") {
       Swal.fire("Oops...", "Color 2 image 1 for 2 colors", "error");
@@ -87,48 +94,52 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
     }
 
     if (productUpdated.colors === "3" && productUpdated.color3Img1 === "") {
-      Swal.fire("Oops...", "Color 3 image 1  and color 2 image 1 are necessary for 3 colors", "error");
+      Swal.fire(
+        "Oops...",
+        "Color 3 image 1  and color 2 image 1 are necessary for 3 colors",
+        "error"
+      );
       return;
     }
 
     if (productUpdated.colors === "3" && productUpdated.color2Img1 === "") {
-      Swal.fire("Oops...", "Color 2 image 1 is necessary too for 3 colors", "error");
+      Swal.fire(
+        "Oops...",
+        "Color 2 image 1 is necessary too for 3 colors",
+        "error"
+      );
       return;
     }
-    
-    console.log(productUpdated)
+
+    console.log(productUpdated);
 
     Swal.fire({
-      title: 'Are you sure?',
+      title: "Are you sure?",
       text: "You won't be able to revert this!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Update'
-    }).then( async (result) => {
+      confirmButtonText: "Update",
+    }).then(async (result) => {
       if (result.isConfirmed) {
         try {
           const res = await fetch(`${URLProducts}${id}`, {
             method: "PUT",
             headers: {
-              "Content-Type": "application/json"
+              "Content-Type": "application/json",
             },
-            body: JSON.stringify(productUpdated)
+            body: JSON.stringify(productUpdated),
           });
-          if(res.status === 200) {
-            Swal.fire(
-              'Updated!',
-              'Your product has been updated.',
-              'success'
-            )
+          if (res.status === 200) {
+            Swal.fire("Updated!", "Your product has been updated.", "success");
             getAPI();
-            navigate("/admin")
+            navigate("/admin");
           }
         } catch (error) {
           console.log(error);
         }
       }
-    })
-  }
+    });
+  };
 
   return (
     <Container style={{ marginTop: "16vh" }}>
@@ -165,6 +176,15 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
             required={true}
             ref={productColorsRef}
           />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+          <Form.Label className="fw-bold fs-3" >DESCRIPTION*</Form.Label>
+          <Form.Control 
+          placeholder="Product description."
+          defaultValue={product.description}
+          required={true}
+          ref={productDescriptionRef}
+          as="textarea" rows={3} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColor1Img1">
           <Form.Label className="fw-bold fs-3">COLOR 1 IMG 1*</Form.Label>
@@ -288,7 +308,9 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           />
         </Form.Group>
         <div>
-          <Button type="submit" variant="info fw-bold w-100">UPDATE</Button>
+          <Button type="submit" variant="info fw-bold w-100">
+            UPDATE
+          </Button>
         </div>
       </StyledForm>
     </Container>

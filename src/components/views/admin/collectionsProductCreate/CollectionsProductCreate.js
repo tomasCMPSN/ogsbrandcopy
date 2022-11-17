@@ -21,6 +21,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
   const [colors, setColors] = useState(0);
+  const [description, setDescription] = useState("");
   const collectionid = collection._id;
 
   const [color1Img1, setColor1Img1] = useState("");
@@ -71,12 +72,20 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
     }
 
     if (colors === "3" && color3Img1 === "") {
-      Swal.fire("Oops...", "Color 3 image 1  and color 2 image 1 are necessary for 3 colors", "error");
+      Swal.fire(
+        "Oops...",
+        "Color 3 image 1  and color 2 image 1 are necessary for 3 colors",
+        "error"
+      );
       return;
     }
 
     if (colors === "3" && color2Img1 === "") {
-      Swal.fire("Oops...", "Color 2 image 1 is necessary too for 3 colors", "error");
+      Swal.fire(
+        "Oops...",
+        "Color 2 image 1 is necessary too for 3 colors",
+        "error"
+      );
       return;
     }
 
@@ -84,6 +93,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
       name,
       price,
       colors,
+      description,
       collectionid,
       color1Img1,
       color1Img2,
@@ -169,6 +179,14 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
             required={true}
             onChange={(e) => setColors(e.target.value)}
           />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formDescription">
+          <Form.Label className="fw-bold fs-3">DESCRIPTION*</Form.Label>
+          <Form.Control
+          placeholder="Product description."
+          required={true}
+          onChange={(e) => setDescription(e.target.value)}
+          as="textarea" rows={3} />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColor1Img1">
           <Form.Label className="fw-bold fs-3">COLOR 1 IMAGE 1*</Form.Label>

@@ -6,8 +6,6 @@ const Product = ({ URLProducts }) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
-  const [colorIndex, setColorIndex] = useState(0);
-
   const [index, setIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
@@ -16,54 +14,61 @@ const Product = ({ URLProducts }) => {
 
   console.log(index);
 
-  const dataArray = [];
+  const dataColor1 = [];
+  const dataColor2 = [];
+  const dataColor3 = [];
+
   if (product.color1Img1 !== "") {
-    dataArray.push(product.color1Img1);
+    dataColor1.push(product.color1Img1);
   }
   if (product.color1Img2 !== "") {
-    dataArray.push(product.color1Img2);
+    dataColor1.push(product.color1Img2);
   }
   if (product.color1Img3 !== "") {
-    dataArray.push(product.color1Img3);
+    dataColor1.push(product.color1Img3);
   }
   if (product.color1Img4 !== "") {
-    dataArray.push(product.color1Img4);
+    dataColor1.push(product.color1Img4);
   }
   if (product.color1Img5 !== "") {
-    dataArray.push(product.color1Img5);
+    dataColor1.push(product.color1Img5);
   }
   if (product.color2Img1 !== "") {
-    dataArray.push(product.color2Img1);
+    dataColor2.push(product.color2Img1);
   }
   if (product.color2Img2 !== "") {
-    dataArray.push(product.color2Img2);
+    dataColor2.push(product.color2Img2);
   }
   if (product.color2Img3 !== "") {
-    dataArray.push(product.color2Img3);
+    dataColor2.push(product.color2Img3);
   }
   if (product.color2Img4 !== "") {
-    dataArray.push(product.color2Img4);
+    dataColor2.push(product.color2Img4);
   }
   if (product.color2Img5 !== "") {
-    dataArray.push(product.color2Img5);
+    dataColor2.push(product.color2Img5);
   }
   if (product.color3Img1 !== "") {
-    dataArray.push(product.color3Img1);
+    dataColor3.push(product.color3Img1);
   }
   if (product.color3Img2 !== "") {
-    dataArray.push(product.color3Img2);
+    dataColor3.push(product.color3Img2);
   }
   if (product.color3Img3 !== "") {
-    dataArray.push(product.color3Img3);
+    dataColor3.push(product.color3Img3);
   }
   if (product.color3Img4 !== "") {
-    dataArray.push(product.color3Img4);
+    dataColor3.push(product.color3Img4);
   }
   if (product.color3Img5 !== "") {
-    dataArray.push(product.color3Img5);
+    dataColor3.push(product.color3Img5);
   }
 
-  console.log(dataArray);
+  const [dataColor, setDataColor] = useState(1);
+
+  // console.log(dataColor1);
+  // console.log(dataColor2);
+  // console.log(dataColor3);
 
   useEffect(() => {
     async function fetchData() {
@@ -83,64 +88,100 @@ const Product = ({ URLProducts }) => {
     <Container style={{ marginTop: "16vh" }}>
       <Row>
         <Col xs={12} lg={9}>
-          <Carousel
-            interval={null}
-            variant="dark"
-            activeIndex={index}
-            onSelect={handleSelect}
-          >
-            {dataArray.map((data, index) => (
-              <Carousel.Item key={index}>
-                <img className="d-block w-100" src={data} alt={data} />
-              </Carousel.Item>
-            ))}
-          </Carousel>
+          {dataColor === 3 && (
+            <Carousel
+              interval={null}
+              variant="dark"
+              activeIndex={index}
+              onSelect={handleSelect}
+            >
+              {dataColor3.map((data, index) => (
+                <Carousel.Item key={index}>
+                  <img className="d-block w-100" src={data} alt={data} />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          )}
+          {dataColor === 2 && (
+            <Carousel
+              interval={null}
+              variant="dark"
+              activeIndex={index}
+              onSelect={handleSelect}
+            >
+              {dataColor2.map((data, index) => (
+                <Carousel.Item key={index}>
+                  <img className="d-block w-100" src={data} alt={data} />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          )}
+          {dataColor === 1 && (
+            <Carousel
+              interval={null}
+              variant="dark"
+              activeIndex={index}
+              onSelect={handleSelect}
+            >
+              {dataColor1.map((data, index) => (
+                <Carousel.Item key={index}>
+                  <img className="d-block w-100" src={data} alt={data} />
+                </Carousel.Item>
+              ))}
+            </Carousel>
+          )}
         </Col>
-        <Col xs={12} lg={3}>
+        <Col className="mt-1 mt-lg-5" xs={12} lg={3}>
           <div>
             <p className="fs-2 fw-bold">{product.name}</p>
           </div>
           <div>
             <p>{product.price} €</p>
           </div>
-          <div>
-            {product.colors > 1 && 
-              <div>
-                <Button>
-                  <Image
-                    fluid={true}
-                    src={product.color1Img1}
-                    alt={product.name}
-                    className="d-block mx-auto"
-                  />
-                </Button>
-                <Button>
-                  <Image
-                    fluid={true}
-                    src={product.color2Img1}
-                    alt={product.name}
-                    className="d-block mx-auto"
-                  />
-                </Button>
-              </div>
-            }
-            {product.colors === 3 && 
-                <Button>
-                  <Image
-                    fluid={true}
-                    src={product.color3Img1}
-                    alt={product.name}
-                    className="d-block mx-auto"
-                  />
-                </Button>
-            }
-          </div>
-          {/* {colorIndex === 0 && <p>1</p> }      
-            {colorIndex === 1 && <p>2</p> }      
-            {colorIndex === 2 && <p>3</p> }      
-            <Button onClick={ () => { setColorIndex(0)} }>1</Button>
-            <Button onClick={ () => { setColorIndex(1)} }>2</Button>
-            <Button onClick={ () => { setColorIndex(2)} }>3</Button> */}
+          <Row>
+            {product.colors !== 1 && (
+              <Col lg={3}>
+                <Image
+                  onClick={() => {
+                    setDataColor(1);
+                    setIndex(0);
+                  }}
+                  fluid={true}
+                  src={product.color1Img1}
+                  alt={product.name}
+                  className={"d-block mx-auto" + (dataColor === 1 ? " opacity-50" : "")}
+                />
+              </Col>
+            )}
+            {product.colors > 1 && (
+              <Col lg={3}>
+                <Image
+                  onClick={() => {
+                    setDataColor(2);
+                    setIndex(0);
+                  }}
+                  fluid={true}
+                  src={product.color2Img1}
+                  alt={product.name}
+                  className={"d-block mx-auto" + (dataColor === 2 ? " opacity-50" : "")}
+                />
+              </Col>
+            )}
+            {product.colors === 3 && (
+              <Col lg={3}>
+                <Image
+                  onClick={() => {
+                    setDataColor(3);
+                    setIndex(0);
+                  }}
+                  fluid={true}
+                  src={product.color3Img1}
+                  alt={product.name}
+                  className={"d-block mx-auto" + (dataColor === 3 ? " opacity-50" : "")}
+                />
+              </Col>
+            )}
+          </Row>
         </Col>
       </Row>
     </Container>

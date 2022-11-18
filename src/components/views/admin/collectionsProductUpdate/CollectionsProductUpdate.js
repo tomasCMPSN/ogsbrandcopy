@@ -21,6 +21,13 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
   const productPriceRef = useRef("");
   const productColorsRef = useRef("");
   const productDescriptionRef = useRef("");
+  const productSizeXSRef = useRef(null);
+  const productSizeSRef = useRef(null);
+  const productSizeMRef = useRef(null);
+  const productSizeLRef = useRef(null);
+  const productSizeXLRef = useRef(null);
+  const productSizeXXLRef = useRef(null);
+  const productSize3XLRef = useRef(null);
   const productColor1Img1Ref = useRef("");
   const productColor1Img2Ref = useRef("");
   const productColor1Img3Ref = useRef("");
@@ -65,11 +72,36 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       Swal.fire("Oops...", "Something went wrong!", "error");
     }
 
+    const sizesData = [];
+
+    if (productSizeXSRef.current.checked === true) {
+      sizesData.push("XS");
+    }
+    if (productSizeSRef.current.checked === true) {
+      sizesData.push("S");
+    }
+    if (productSizeMRef.current.checked === true) {
+      sizesData.push("M");
+    }
+    if (productSizeLRef.current.checked === true) {
+      sizesData.push("L");
+    }
+    if (productSizeXLRef.current.checked === true) {
+      sizesData.push("XL");
+    }
+    if (productSizeXXLRef.current.checked === true) {
+      sizesData.push("XXL");
+    }
+    if (productSize3XLRef.current.checked === true) {
+      sizesData.push("3XL");
+    }
+
     const productUpdated = {
       name: productNameRef.current.value,
       price: productPriceRef.current.value,
       colors: productColorsRef.current.value,
       description: productDescriptionRef.current.value,
+      sizesData: sizesData,
       color1Img1: productColor1Img1Ref.current.value,
       color1Img2: productColor1Img2Ref.current.value,
       color1Img3: productColor1Img3Ref.current.value,
@@ -177,15 +209,125 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
             ref={productColorsRef}
           />
         </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label className="fw-bold fs-3" >DESCRIPTION*</Form.Label>
-          <Form.Control 
-          placeholder="Product description."
-          defaultValue={product.description}
-          required={true}
-          ref={productDescriptionRef}
-          as="textarea" rows={3} />
+        <Form.Group className="mb-3" controlId="formDescription">
+          <Form.Label className="fw-bold fs-3">DESCRIPTION*</Form.Label>
+          <Form.Control
+            placeholder="Product description."
+            defaultValue={product.description}
+            required={true}
+            ref={productDescriptionRef}
+            as="textarea"
+            rows={3}
+          />
         </Form.Group>
+        <Form.Group controlId="formSizes">
+          <Form.Label className="fw-bold fs-3">SIZES</Form.Label>
+        </Form.Group>
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSizeXS">
+            <Form.Check
+              ref={productSizeXSRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "XS") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="XS"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSizeS">
+            <Form.Check
+              ref={productSizeSRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "S") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="S"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSizeM">
+            <Form.Check
+              ref={productSizeMRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "M") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="M"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSizeL">
+            <Form.Check
+              ref={productSizeLRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "L") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="L"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSizeXL">
+            <Form.Check
+              ref={productSizeXLRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "XL") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="XL"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSizeXXL">
+            <Form.Check
+              ref={productSizeXXLRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "XXL") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="XXL"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
+        {product.sizesData ? (
+          <Form.Group className="mb-3" controlId="formSize3XL">
+            <Form.Check
+              ref={productSize3XLRef}
+              defaultChecked={
+                product.sizesData.find((size) => size === "3XL") ? true : false
+              }
+              className="fw-bold"
+              type="checkbox"
+              label="3XL"
+            />
+          </Form.Group>
+        ) : (
+          <p>Loading.</p>
+        )}
         <Form.Group className="mb-3" controlId="formColor1Img1">
           <Form.Label className="fw-bold fs-3">COLOR 1 IMG 1*</Form.Label>
           <Form.Control

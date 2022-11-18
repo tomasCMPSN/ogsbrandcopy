@@ -22,6 +22,13 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
   const [price, setPrice] = useState(0);
   const [colors, setColors] = useState(0);
   const [description, setDescription] = useState("");
+  const [sizeXS, setSizeXS] = useState(false)
+  const [sizeS, setSizeS] = useState(false)
+  const [sizeM, setSizeM] = useState(false)
+  const [sizeL, setSizeL] = useState(false)
+  const [sizeXL, setSizeXL] = useState(false)
+  const [sizeXXL, setSizeXXL] = useState(false)
+  const [size3XL, setSize3XL] = useState(false)
   const collectionid = collection._id;
 
   const [color1Img1, setColor1Img1] = useState("");
@@ -89,11 +96,36 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
       return;
     }
 
+    const sizesData = []
+
+    if (sizeXS === true) {
+      sizesData.push("XS")
+    }
+    if (sizeS === true) {
+      sizesData.push("S")
+    }
+    if (sizeM === true) {
+      sizesData.push("M")
+    }
+    if (sizeL === true) {
+      sizesData.push("L")
+    }
+    if (sizeXL === true) {
+      sizesData.push("XL")
+    }
+    if (sizeXXL === true) {
+      sizesData.push("XXL")
+    }
+    if (size3XL === true) {
+      sizesData.push("3XL")
+    }
+
     const newProduct = {
       name,
       price,
       colors,
       description,
+      sizesData,
       collectionid,
       color1Img1,
       color1Img2,
@@ -183,10 +215,36 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
         <Form.Group className="mb-3" controlId="formDescription">
           <Form.Label className="fw-bold fs-3">DESCRIPTION*</Form.Label>
           <Form.Control
-          placeholder="Product description."
-          required={true}
-          onChange={(e) => setDescription(e.target.value)}
-          as="textarea" rows={3} />
+            placeholder="Product description."
+            required={true}
+            onChange={(e) => setDescription(e.target.value)}
+            as="textarea"
+            rows={3}
+          />
+        </Form.Group>
+        <Form.Group controlId="formSizes">
+          <Form.Label className="fw-bold fs-3">SIZES</Form.Label>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSizeXS">
+          <Form.Check onChange={(e) => {setSizeXS(e.target.checked)}} className="fw-bold" type="checkbox" label="XS" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSizeS">
+          <Form.Check onChange={(e) => {setSizeS(e.target.checked)}} className="fw-bold" type="checkbox" label="S" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSizem">
+          <Form.Check onChange={(e) => {setSizeM(e.target.checked)}} className="fw-bold" type="checkbox" label="M" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSizeL">
+          <Form.Check onChange={(e) => {setSizeL(e.target.checked)}} className="fw-bold" type="checkbox" label="L" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSizeXL">
+          <Form.Check onChange={(e) => {setSizeXL(e.target.checked)}} className="fw-bold" type="checkbox" label="XL" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSizeXXL">
+          <Form.Check onChange={(e) => {setSizeXXL(e.target.checked)}} className="fw-bold" type="checkbox" label="XXL" />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formSize3XL">
+          <Form.Check onChange={(e) => {setSize3XL(e.target.checked)}} className="fw-bold" type="checkbox" label="3XL" />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColor1Img1">
           <Form.Label className="fw-bold fs-3">COLOR 1 IMAGE 1*</Form.Label>

@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Button, Carousel, Col, Container, Image, Row } from "react-bootstrap";
+import { Carousel, Col, Container, Image, Offcanvas, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { StyledButton } from "./StyledButton";
 
 const Product = ({ URLProducts }) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [index, setIndex] = useState(0);
 
@@ -132,7 +138,7 @@ const Product = ({ URLProducts }) => {
           )}
         </Col>
         <Col className="mt-1 mt-lg-5" xs={12} lg={3}>
-          <div>
+          <div className="mt-1 mt-lg-5">
             <p className="fs-2 fw-bold">{product.name}</p>
           </div>
           <div>
@@ -140,7 +146,7 @@ const Product = ({ URLProducts }) => {
           </div>
           <Row>
             {product.colors !== 1 && (
-              <Col lg={3}>
+              <Col xs={3} lg={3}>
                 <Image
                   onClick={() => {
                     setDataColor(1);
@@ -149,12 +155,14 @@ const Product = ({ URLProducts }) => {
                   fluid={true}
                   src={product.color1Img1}
                   alt={product.name}
-                  className={"d-block mx-auto" + (dataColor === 1 ? " opacity-50" : "")}
+                  className={
+                    "d-block mx-auto" + (dataColor === 1 ? " opacity-50" : "")
+                  }
                 />
               </Col>
             )}
             {product.colors > 1 && (
-              <Col lg={3}>
+              <Col xs={3} lg={3}>
                 <Image
                   onClick={() => {
                     setDataColor(2);
@@ -163,12 +171,14 @@ const Product = ({ URLProducts }) => {
                   fluid={true}
                   src={product.color2Img1}
                   alt={product.name}
-                  className={"d-block mx-auto" + (dataColor === 2 ? " opacity-50" : "")}
+                  className={
+                    "d-block mx-auto" + (dataColor === 2 ? " opacity-50" : "")
+                  }
                 />
               </Col>
             )}
             {product.colors === 3 && (
-              <Col lg={3}>
+              <Col xs={3} lg={3}>
                 <Image
                   onClick={() => {
                     setDataColor(3);
@@ -177,13 +187,32 @@ const Product = ({ URLProducts }) => {
                   fluid={true}
                   src={product.color3Img1}
                   alt={product.name}
-                  className={"d-block mx-auto" + (dataColor === 3 ? " opacity-50" : "")}
+                  className={
+                    "d-block mx-auto" + (dataColor === 3 ? " opacity-50" : "")
+                  }
                 />
               </Col>
             )}
           </Row>
+          <div>
+            <StyledButton onClick={handleShow} variant="light" size="lg" className="w-100 my-3 fw-bold">
+              Add to cart
+            </StyledButton>
+          </div>
+          <hr className="mb-5" />
+          <div>
+            <p>{product.description}</p>
+          </div>
         </Col>
       </Row>
+
+      <Offcanvas placement="end" show={show} onHide={handleClose}>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
+
     </Container>
   );
 };

@@ -1,24 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { Carousel, Col, Container, Image, Offcanvas, Row } from "react-bootstrap";
+import {
+  Carousel,
+  Col,
+  Container,
+  Image,
+  Offcanvas,
+  Row,
+} from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { StyledButton } from "./StyledButton";
+import "./Product.css"
 
 const Product = ({ URLProducts }) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
+
+  const [sizesMapData, setSizesMapData] = useState("")
+
+  console.log(sizesMapData);
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [index, setIndex] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
 
   const handleSelect = (selectedIndex, e) => {
-    setIndex(selectedIndex);
+    setImageIndex(selectedIndex);
   };
 
-  console.log(index);
+  console.log(imageIndex);
 
   const dataColor1 = [];
   const dataColor2 = [];
@@ -83,6 +95,7 @@ const Product = ({ URLProducts }) => {
         const productApi = await res.json();
         setProduct(productApi);
         console.log(productApi);
+        setSizesMapData(productApi.sizesData[0])
       } catch (error) {
         console.log(error);
       }
@@ -98,7 +111,7 @@ const Product = ({ URLProducts }) => {
             <Carousel
               interval={null}
               variant="dark"
-              activeIndex={index}
+              activeIndex={imageIndex}
               onSelect={handleSelect}
             >
               {dataColor3.map((data, index) => (
@@ -112,7 +125,7 @@ const Product = ({ URLProducts }) => {
             <Carousel
               interval={null}
               variant="dark"
-              activeIndex={index}
+              activeIndex={imageIndex}
               onSelect={handleSelect}
             >
               {dataColor2.map((data, index) => (
@@ -126,7 +139,7 @@ const Product = ({ URLProducts }) => {
             <Carousel
               interval={null}
               variant="dark"
-              activeIndex={index}
+              activeIndex={imageIndex}
               onSelect={handleSelect}
             >
               {dataColor1.map((data, index) => (
@@ -150,7 +163,7 @@ const Product = ({ URLProducts }) => {
                 <Image
                   onClick={() => {
                     setDataColor(1);
-                    setIndex(0);
+                    setImageIndex(0);
                   }}
                   fluid={true}
                   src={product.color1Img1}
@@ -166,7 +179,7 @@ const Product = ({ URLProducts }) => {
                 <Image
                   onClick={() => {
                     setDataColor(2);
-                    setIndex(0);
+                    setImageIndex(0);
                   }}
                   fluid={true}
                   src={product.color2Img1}
@@ -182,7 +195,7 @@ const Product = ({ URLProducts }) => {
                 <Image
                   onClick={() => {
                     setDataColor(3);
-                    setIndex(0);
+                    setImageIndex(0);
                   }}
                   fluid={true}
                   src={product.color3Img1}
@@ -193,9 +206,25 @@ const Product = ({ URLProducts }) => {
                 />
               </Col>
             )}
+            <div className="d-flex flex-row mb-3 mt-3 justify-content-center justify-content-lg-start">
+              {product.sizesData ? (
+                product.sizesData.map((data) => (
+                  <div onClick={ () => {setSizesMapData(data)}} key={data} className={"p-2" + (sizesMapData === data ? " underlineYellow" : "")}>
+                    {data}
+                  </div>
+                ))
+              ) : (
+                <p>Loading.</p>
+              )}
+            </div>
           </Row>
           <div>
-            <StyledButton onClick={handleShow} variant="light" size="lg" className="w-100 my-3 fw-bold">
+            <StyledButton
+              onClick={handleShow}
+              variant="light"
+              size="lg"
+              className="w-100 my-3 fw-bold"
+            >
               Add to cart
             </StyledButton>
           </div>
@@ -212,7 +241,6 @@ const Product = ({ URLProducts }) => {
           have chosen. Like, text, images, lists, etc.
         </Offcanvas.Body>
       </Offcanvas>
-
     </Container>
   );
 };

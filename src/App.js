@@ -21,9 +21,37 @@ function App() {
   const [collections, setCollections] = useState([]);
   const [products, setProducts] = useState([]);
   const [homeData, setHomeData] = useState([]);
+
   const URLCollections = process.env.REACT_APP_API_COLLECTIONS;
   const URLProducts = process.env.REACT_APP_API_PRODUCTS;
   const URLHomeData = process.env.REACT_APP_API_HOMEDATA;
+
+  const [cartItems, setCartItems] = useState([]);
+  const onAdd = (product) => {
+    const exist = cartItems.find((product) => product.id === product.id);
+    if (exist) {
+      const newCartItems = cartItems.map((product) =>
+        product.id === product.id ? { ...exist, qty: exist.qty + 1 } : product
+      );
+      setCartItems(newCartItems);
+    } else {
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
+    }
+  };
+  const onRemove = (product) => {
+    const exist = cartItems.find((product) => product.id === product.id);
+    if (exist.qty === 1) {
+      const newCartItems = cartItems.filter(
+        (product) => product.id !== product.id
+      );
+      setCartItems(newCartItems);
+    } else {
+      const newCartItems = cartItems.map((product) =>
+        product.id === product.id ? { ...exist, qty: exist.qty - 1 } : product
+      );
+      setCartItems(newCartItems);
+    }
+  };
 
   useEffect(() => {
     getAPI();
@@ -52,7 +80,7 @@ function App() {
     <div>
       <GlobalFonts />
       <BrowserRouter>
-        <Navigation />
+        <Navigation countCartItems={cartItems.length} />
         <main>
           <Routes>
             <Route path="/" element={<Home homeData={homeData} />} />
@@ -70,7 +98,17 @@ function App() {
                 />
               }
             />
-            <Route path="/collections/:id/:id" element={<Product URLProducts={URLProducts} />} /> 
+            <Route
+              path="/collections/:id/:id"
+              element={
+                <Product
+                  cartItems={cartItems}
+                  onAdd={onAdd}
+                  onRemove={onRemove}
+                  URLProducts={URLProducts}
+                />
+              }
+            />
             <Route
               path="/admin"
               element={

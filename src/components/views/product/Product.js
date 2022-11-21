@@ -11,7 +11,7 @@ import { useParams } from "react-router-dom";
 import { StyledButton } from "./StyledButton";
 import "./Product.css"
 
-const Product = ({ URLProducts }) => {
+const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
@@ -220,7 +220,10 @@ const Product = ({ URLProducts }) => {
           </Row>
           <div>
             <StyledButton
-              onClick={handleShow}
+              onClick={() => {
+                handleShow()
+                onAdd(product)
+              }}
               variant="light"
               size="lg"
               className="w-100 my-3 fw-bold"
@@ -237,8 +240,7 @@ const Product = ({ URLProducts }) => {
 
       <Offcanvas placement="end" show={show} onHide={handleClose}>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          Some text as placeholder.
         </Offcanvas.Body>
       </Offcanvas>
     </Container>

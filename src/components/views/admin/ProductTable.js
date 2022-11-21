@@ -70,6 +70,7 @@ const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
         {product.description}
       </StyledTruncateTd>
       <td>{product.sizesData}</td>
+      <td>{product.color1Name}</td>
       <StyledTruncateTd className="text-truncate">
         {product.color1Img1}
       </StyledTruncateTd>
@@ -85,6 +86,7 @@ const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
       <StyledTruncateTd className="text-truncate">
         {product.color1Img5}
       </StyledTruncateTd>
+      <td>{product.color2Name}</td>
       <StyledTruncateTd className="text-truncate">
         {product.color2Img1}
       </StyledTruncateTd>
@@ -100,6 +102,7 @@ const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
       <StyledTruncateTd className="text-truncate">
         {product.color2Img5}
       </StyledTruncateTd>
+      <td>{product.color3Name}</td>
       <StyledTruncateTd className="text-truncate">
         {product.color3Img1}
       </StyledTruncateTd>

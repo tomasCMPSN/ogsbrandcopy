@@ -31,16 +31,19 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
   const [size3XL, setSize3XL] = useState(false)
   const collectionid = collection._id;
 
+  const [color1Name, setColor1Name] = useState("");
   const [color1Img1, setColor1Img1] = useState("");
   const [color1Img2, setColor1Img2] = useState("");
   const [color1Img3, setColor1Img3] = useState("");
   const [color1Img4, setColor1Img4] = useState("");
   const [color1Img5, setColor1Img5] = useState("");
+  const [color2Name, setColor2Name] = useState("");
   const [color2Img1, setColor2Img1] = useState("");
   const [color2Img2, setColor2Img2] = useState("");
   const [color2Img3, setColor2Img3] = useState("");
   const [color2Img4, setColor2Img4] = useState("");
   const [color2Img5, setColor2Img5] = useState("");
+  const [color3Name, setColor3Name] = useState("");
   const [color3Img1, setColor3Img1] = useState("");
   const [color3Img2, setColor3Img2] = useState("");
   const [color3Img3, setColor3Img3] = useState("");
@@ -70,6 +73,29 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
       !validateURL(color1Img1)
     ) {
       Swal.fire("Oops...", "Invalid validation.", "error");
+      return;
+    }
+
+    if(colors === "2" && color2Name === "") {
+      Swal.fire("Oops...", "Color 2 name for 2 colors", "error");
+      return;
+    }
+
+    if (colors === "3" && color3Name === "") {
+      Swal.fire(
+        "Oops...",
+        "Color 3 name  and color 2 name are necessary for 3 colors",
+        "error"
+      );
+      return;
+    }
+
+    if (colors === "3" && color2Name === "") {
+      Swal.fire(
+        "Oops...",
+        "Color 2 name is necessary too for 3 colors",
+        "error"
+      );
       return;
     }
 
@@ -127,16 +153,19 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
       description,
       sizesData,
       collectionid,
+      color1Name,
       color1Img1,
       color1Img2,
       color1Img3,
       color1Img4,
       color1Img5,
+      color2Name,
       color2Img1,
       color2Img2,
       color2Img3,
       color2Img4,
       color2Img5,
+      color3Name,
       color3Img1,
       color3Img2,
       color3Img3,
@@ -246,6 +275,15 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
         <Form.Group className="mb-3" controlId="formSize3XL">
           <Form.Check onChange={(e) => {setSize3XL(e.target.checked)}} className="fw-bold" type="checkbox" label="3XL" />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formColor1Name">
+          <Form.Label className="fw-bold fs-3">COLOR 1 NAME*</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter color name."
+            required={true}
+            onChange={(e) => setColor1Name(e.target.value)}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formColor1Img1">
           <Form.Label className="fw-bold fs-3">COLOR 1 IMAGE 1*</Form.Label>
           <Form.Control
@@ -287,6 +325,14 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
             onChange={(e) => setColor1Img5(e.target.value)}
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formColor2Name">
+          <Form.Label className="fw-bold fs-3">COLOR 2 NAME</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter color 2 name"
+            onChange={(e) => setColor2Name(e.target.value)}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formColor2Img1">
           <Form.Label className="fw-bold fs-3">COLOR 2 IMAGE 1</Form.Label>
           <Form.Control
@@ -325,6 +371,14 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
             type="url"
             placeholder="Enter image URL"
             onChange={(e) => setColor2Img5(e.target.value)}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formColor3Name">
+          <Form.Label className="fw-bold fs-3">COLOR 3 NAME</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Enter color 3 name"
+            onChange={(e) => setColor3Name(e.target.value)}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColor3Img1">

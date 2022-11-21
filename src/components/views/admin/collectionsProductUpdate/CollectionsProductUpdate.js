@@ -28,16 +28,19 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
   const productSizeXLRef = useRef(null);
   const productSizeXXLRef = useRef(null);
   const productSize3XLRef = useRef(null);
+  const productColor1NameRef = useRef("");
   const productColor1Img1Ref = useRef("");
   const productColor1Img2Ref = useRef("");
   const productColor1Img3Ref = useRef("");
   const productColor1Img4Ref = useRef("");
   const productColor1Img5Ref = useRef("");
+  const productColor2NameRef = useRef("");
   const productColor2Img1Ref = useRef("");
   const productColor2Img2Ref = useRef("");
   const productColor2Img3Ref = useRef("");
   const productColor2Img4Ref = useRef("");
   const productColor2Img5Ref = useRef("");
+  const productColor3NameRef = useRef("");
   const productColor3Img1Ref = useRef("");
   const productColor3Img2Ref = useRef("");
   const productColor3Img3Ref = useRef("");
@@ -102,16 +105,19 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       colors: productColorsRef.current.value,
       description: productDescriptionRef.current.value,
       sizesData: sizesData,
+      color1Name: productColor1NameRef.current.value,
       color1Img1: productColor1Img1Ref.current.value,
       color1Img2: productColor1Img2Ref.current.value,
       color1Img3: productColor1Img3Ref.current.value,
       color1Img4: productColor1Img4Ref.current.value,
       color1Img5: productColor1Img5Ref.current.value,
+      color2Name: productColor2NameRef.current.value,
       color2Img1: productColor2Img1Ref.current.value,
       color2Img2: productColor2Img2Ref.current.value,
       color2Img3: productColor2Img3Ref.current.value,
       color2Img4: productColor2Img4Ref.current.value,
       color2Img5: productColor2Img5Ref.current.value,
+      color3Name: productColor3NameRef.current.value,
       color3Img1: productColor3Img1Ref.current.value,
       color3Img2: productColor3Img2Ref.current.value,
       color3Img3: productColor3Img3Ref.current.value,
@@ -119,6 +125,29 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       color3Img5: productColor3Img5Ref.current.value,
       collectionid: product.collectionid,
     };
+
+    if(productUpdated.colors === "2" && productUpdated.color2Name === "") {
+      Swal.fire("Oops...", "Color 2 name for 2 colors", "error");
+      return;
+    }
+
+    if (productUpdated.colors === "3" && productUpdated.color3Name === "") {
+      Swal.fire(
+        "Oops...",
+        "Color 3 name  and color 2 name are necessary for 3 colors",
+        "error"
+      );
+      return;
+    }
+
+    if (productUpdated.colors === "3" && productUpdated.color2Name === "") {
+      Swal.fire(
+        "Oops...",
+        "Color 2 name is necessary too for 3 colors",
+        "error"
+      );
+      return;
+    }
 
     if (productUpdated.colors === "2" && productUpdated.color2Img1 === "") {
       Swal.fire("Oops...", "Color 2 image 1 for 2 colors", "error");
@@ -328,6 +357,15 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
         ) : (
           <p>Loading.</p>
         )}
+        <Form.Group className="mb-3" controlId="formColor1Name">
+          <Form.Label className="fw-bold fs-3">COLOR 1 NAME*</Form.Label>
+          <Form.Control
+            type="text"
+            defaultValue={product.color1Name}
+            required={true}
+            ref={productColor1NameRef}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formColor1Img1">
           <Form.Label className="fw-bold fs-3">COLOR 1 IMG 1*</Form.Label>
           <Form.Control
@@ -369,6 +407,15 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
             ref={productColor1Img5Ref}
           />
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formColor1Name">
+          <Form.Label className="fw-bold fs-3">COLOR 2 NAME*</Form.Label>
+          <Form.Control
+            type="text"
+            defaultValue={product.color2Name}
+            required={true}
+            ref={productColor2NameRef}
+          />
+        </Form.Group>
         <Form.Group className="mb-3" controlId="formColor2Img1">
           <Form.Label className="fw-bold fs-3">COLOR 2 IMG 1</Form.Label>
           <Form.Control
@@ -407,6 +454,15 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
             type="url"
             defaultValue={product.color2Img5}
             ref={productColor2Img5Ref}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formColor1Name">
+          <Form.Label className="fw-bold fs-3">COLOR 3 NAME*</Form.Label>
+          <Form.Control
+            type="text"
+            defaultValue={product.color3Name}
+            required={true}
+            ref={productColor3NameRef}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formColor3Img1">

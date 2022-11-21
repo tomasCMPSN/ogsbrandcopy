@@ -9,7 +9,7 @@ import { StyledNavbar } from "./StyledNavbar";
 import { StyledOffcanvasHeader } from "./StyledOffcanvasHeader";
 import "./Navigation.css";
 
-const Navigation = () => {
+const Navigation = ({ countCartItems }) => {
   const location = useLocation();
   const [url, SetUrl] = useState(null);
   useEffect(() => {
@@ -154,6 +154,7 @@ const Navigation = () => {
             </NavLink>
             <StyledLinkNavbar className="me-5" to="/shop/cart">
               Cart
+              {countCartItems ? ( <p>{countCartItems}</p> ) : ("")}
             </StyledLinkNavbar>
           </div>
         </Container>

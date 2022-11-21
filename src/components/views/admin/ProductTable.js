@@ -69,6 +69,7 @@ const ProductTable = ({ product, URLCollections, URLProducts, getAPI }) => {
       <StyledTruncateTd className="text-truncate">
         {product.description}
       </StyledTruncateTd>
+      <td>{product.weight}</td>
       <td>{product.sizesData}</td>
       <td>{product.color1Name}</td>
       <StyledTruncateTd className="text-truncate">

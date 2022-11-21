@@ -21,6 +21,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
   const productPriceRef = useRef("");
   const productColorsRef = useRef("");
   const productDescriptionRef = useRef("");
+  const productWeightRef = useRef("")
   const productSizeXSRef = useRef(null);
   const productSizeSRef = useRef(null);
   const productSizeMRef = useRef(null);
@@ -104,6 +105,7 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
       price: productPriceRef.current.value,
       colors: productColorsRef.current.value,
       description: productDescriptionRef.current.value,
+      weight: productWeightRef.current.value,
       sizesData: sizesData,
       color1Name: productColor1NameRef.current.value,
       color1Img1: productColor1Img1Ref.current.value,
@@ -247,6 +249,16 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
             ref={productDescriptionRef}
             as="textarea"
             rows={3}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formWeight">
+          <Form.Label className="fw-bold fs-3">WEIGHT*</Form.Label>
+          <Form.Control
+            type="number"
+            step="0.001"
+            defaultValue={product.weight}
+            required={true}
+            ref={productWeightRef}
           />
         </Form.Group>
         <Form.Group controlId="formSizes">
@@ -412,7 +424,6 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Control
             type="text"
             defaultValue={product.color2Name}
-            required={true}
             ref={productColor2NameRef}
           />
         </Form.Group>
@@ -461,7 +472,6 @@ const CollectionsProductUpdate = ({ URLProducts, getAPI }) => {
           <Form.Control
             type="text"
             defaultValue={product.color3Name}
-            required={true}
             ref={productColor3NameRef}
           />
         </Form.Group>

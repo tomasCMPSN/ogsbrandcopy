@@ -22,6 +22,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
   const [price, setPrice] = useState(0);
   const [colors, setColors] = useState(0);
   const [description, setDescription] = useState("");
+  const [weight, setWeight] = useState(0)
   const [sizeXS, setSizeXS] = useState(false)
   const [sizeS, setSizeS] = useState(false)
   const [sizeM, setSizeM] = useState(false)
@@ -151,6 +152,7 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
       price,
       colors,
       description,
+      weight,
       sizesData,
       collectionid,
       color1Name,
@@ -249,6 +251,16 @@ const CollectionsProductCreate = ({ URLCollections, URLProducts, getAPI }) => {
             onChange={(e) => setDescription(e.target.value)}
             as="textarea"
             rows={3}
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formWeight">
+          <Form.Label className="fw-bold fs-3">WEIGHT*</Form.Label>
+          <Form.Control
+            type="number"
+            step="0.001"
+            placeholder="Enter weight in kilograms"
+            required={true}
+            onChange={(e) => setWeight(e.target.value)}
           />
         </Form.Group>
         <Form.Group controlId="formSizes">

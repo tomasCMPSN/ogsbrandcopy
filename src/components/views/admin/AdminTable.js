@@ -69,6 +69,7 @@ const AdminTable = ({collection, URLCollections, URLProducts, getAPI}) => {
             <th className="text-nowrap">Price €</th>
             <th>Colors</th>
             <th>Description</th>
+            <th>Weight</th>
             <th>Sizes</th>
             <th className="text-nowrap">Color 1 Name</th>
             <th>C1I1</th>

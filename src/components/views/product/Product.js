@@ -17,6 +17,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
 
   const [sizesMapData, setSizesMapData] = useState("")
 
+  const [colorSelected, setColorSelected] =useState("")
+
   console.log(sizesMapData);
 
   const [show, setShow] = useState(false);
@@ -84,10 +86,6 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
 
   const [dataColor, setDataColor] = useState(1);
 
-  // console.log(dataColor1);
-  // console.log(dataColor2);
-  // console.log(dataColor3);
-
   useEffect(() => {
     async function fetchData() {
       try {
@@ -96,6 +94,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
         setProduct(productApi);
         console.log(productApi);
         setSizesMapData(productApi.sizesData[0])
+        setColorSelected(productApi.color1Name)
       } catch (error) {
         console.log(error);
       }
@@ -163,6 +162,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(1);
+                    setColorSelected(product.color1Name)
+                    console.log(product.color1Name);
                     setImageIndex(0);
                   }}
                   fluid={true}
@@ -179,6 +180,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(2);
+                    setColorSelected(product.color2Name)
+                    console.log(product.color2Name);
                     setImageIndex(0);
                   }}
                   fluid={true}
@@ -195,6 +198,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(3);
+                    setColorSelected(product.color3Name)
+                    console.log(product.color3Name);
                     setImageIndex(0);
                   }}
                   fluid={true}
@@ -222,7 +227,11 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
             <StyledButton
               onClick={() => {
                 handleShow()
+                product.sizeSelected = sizesMapData
+                product.colorSelected = colorSelected
+                console.log(product);
                 onAdd(product)
+                console.log(cartItems);
               }}
               variant="light"
               size="lg"
@@ -240,7 +249,14 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
 
       <Offcanvas placement="end" show={show} onHide={handleClose}>
         <Offcanvas.Body>
-          Some text as placeholder.
+          {cartItems.map((item, index) => (
+            <div key={index}>
+              <p>{item._id}</p>
+              <p>{item.qty}</p>
+              <p>{item.sizeSelected}</p>
+              <p>{item.colorSelected}</p>
+            </div>
+          ))}
         </Offcanvas.Body>
       </Offcanvas>
     </Container>

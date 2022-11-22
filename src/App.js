@@ -28,26 +28,31 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
-    const exist = cartItems.find((product) => product.id === product.id);
+    const exist = cartItems.find(
+      (x) =>
+        x._id === product._id &&
+        x.sizeSelected === product.sizeSelected &&
+        x.colorSelected === product.colorSelected
+    );
     if (exist) {
-      const newCartItems = cartItems.map((product) =>
-        product.id === product.id ? { ...exist, qty: exist.qty + 1 } : product
+      setCartItems(
+        cartItems.map((x) =>
+          x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x
+        )
       );
-      setCartItems(newCartItems);
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
   };
+
   const onRemove = (product) => {
-    const exist = cartItems.find((product) => product.id === product.id);
+    const exist = cartItems.find((x) => x._id === product._id);
     if (exist.qty === 1) {
-      const newCartItems = cartItems.filter(
-        (product) => product.id !== product.id
-      );
+      const newCartItems = cartItems.filter((x) => x._id !== product._id);
       setCartItems(newCartItems);
     } else {
-      const newCartItems = cartItems.map((product) =>
-        product.id === product.id ? { ...exist, qty: exist.qty - 1 } : product
+      const newCartItems = cartItems.map((x) =>
+        x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
       );
       setCartItems(newCartItems);
     }

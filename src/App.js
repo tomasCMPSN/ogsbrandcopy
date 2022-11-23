@@ -32,17 +32,22 @@ function App() {
       (x) =>
         x._id === product._id &&
         x.sizeSelected === product.sizeSelected &&
-        x.colorSelected === product.colorSelected
+        x.colorSelected === product.colorSelected &&
+        x.imageSelected === product.imageSelected
     );
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-          x._id === product._id ? { ...exist, qty: exist.qty + 1 } : x
+        x._id === product._id &&
+        x.sizeSelected === product.sizeSelected &&
+        x.colorSelected === product.colorSelected &&
+        x.imageSelected === product.imageSelected ? { ...exist, qty: exist.qty + 1 } : x
         )
       );
     } else {
       setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
+    console.log(cartItems);
   };
 
   const onRemove = (product) => {

@@ -17,7 +17,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
 
   const [sizesMapData, setSizesMapData] = useState("")
 
-  const [colorSelected, setColorSelected] =useState("")
+  const [colorSelected, setColorSelected] = useState("")
+  const [colorImageSelected, setColorImageSelected] = useState("")
 
   console.log(sizesMapData);
 
@@ -95,6 +96,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
         console.log(productApi);
         setSizesMapData(productApi.sizesData[0])
         setColorSelected(productApi.color1Name)
+        setColorImageSelected(productApi.color1Img1)
       } catch (error) {
         console.log(error);
       }
@@ -162,6 +164,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(1);
+                    setColorImageSelected(product.color1Img1)
                     setColorSelected(product.color1Name)
                     console.log(product.color1Name);
                     setImageIndex(0);
@@ -180,6 +183,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(2);
+                    setColorImageSelected(product.color2Img1)
                     setColorSelected(product.color2Name)
                     console.log(product.color2Name);
                     setImageIndex(0);
@@ -198,6 +202,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(3);
+                    setColorImageSelected(product.color3Img1)
                     setColorSelected(product.color3Name)
                     console.log(product.color3Name);
                     setImageIndex(0);
@@ -229,9 +234,9 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 handleShow()
                 product.sizeSelected = sizesMapData
                 product.colorSelected = colorSelected
+                product.imageSelected = colorImageSelected
                 console.log(product);
                 onAdd(product)
-                console.log(cartItems);
               }}
               variant="light"
               size="lg"
@@ -250,12 +255,18 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
       <Offcanvas placement="end" show={show} onHide={handleClose}>
         <Offcanvas.Body>
           {cartItems.map((item, index) => (
-            <div key={index}>
-              <p>{item._id}</p>
-              <p>{item.qty}</p>
-              <p>{item.sizeSelected}</p>
-              <p>{item.colorSelected}</p>
-            </div>
+            <Row key={index}>
+              <Col xs={3} lg={3}>
+                <Image 
+                fluid={true}
+                src={item.imageSelected}
+                />
+              </Col>
+              <div>{item.name}</div>
+            <div>{item.qty}</div>
+            <div>{item.colorSelected}</div>
+            <div>{item.sizeSelected}</div>
+            </Row>
           ))}
         </Offcanvas.Body>
       </Offcanvas>

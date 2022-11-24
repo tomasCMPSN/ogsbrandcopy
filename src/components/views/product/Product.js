@@ -7,18 +7,27 @@ import {
   Offcanvas,
   Row,
 } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { AiOutlineClose } from "react-icons/ai";
+import { Link, useParams } from "react-router-dom";
 import { StyledButton } from "./StyledButton";
-import "./Product.css"
+import "./Product.css";
 
 const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
-  const [sizesMapData, setSizesMapData] = useState("")
+  const [sizesMapData, setSizesMapData] = useState("");
 
-  const [colorSelected, setColorSelected] = useState("")
-  const [colorImageSelected, setColorImageSelected] = useState("")
+  const [colorSelected, setColorSelected] = useState("");
+  const [colorImageSelected, setColorImageSelected] = useState("");
+
+  const subtotalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const taxPrice = subtotalPrice * 0.21;
+  const TotalPrice = subtotalPrice + taxPrice;
+
+  function getCartId(max) {
+    return Math.floor(Math.random() * max);
+  }
 
   console.log(sizesMapData);
 
@@ -94,9 +103,9 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
         const productApi = await res.json();
         setProduct(productApi);
         console.log(productApi);
-        setSizesMapData(productApi.sizesData[0])
-        setColorSelected(productApi.color1Name)
-        setColorImageSelected(productApi.color1Img1)
+        setSizesMapData(productApi.sizesData[0]);
+        setColorSelected(productApi.color1Name);
+        setColorImageSelected(productApi.color1Img1);
       } catch (error) {
         console.log(error);
       }
@@ -164,8 +173,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(1);
-                    setColorImageSelected(product.color1Img1)
-                    setColorSelected(product.color1Name)
+                    setColorImageSelected(product.color1Img1);
+                    setColorSelected(product.color1Name);
                     console.log(product.color1Name);
                     setImageIndex(0);
                   }}
@@ -183,8 +192,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(2);
-                    setColorImageSelected(product.color2Img1)
-                    setColorSelected(product.color2Name)
+                    setColorImageSelected(product.color2Img1);
+                    setColorSelected(product.color2Name);
                     console.log(product.color2Name);
                     setImageIndex(0);
                   }}
@@ -202,8 +211,8 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
                 <Image
                   onClick={() => {
                     setDataColor(3);
-                    setColorImageSelected(product.color3Img1)
-                    setColorSelected(product.color3Name)
+                    setColorImageSelected(product.color3Img1);
+                    setColorSelected(product.color3Name);
                     console.log(product.color3Name);
                     setImageIndex(0);
                   }}
@@ -219,7 +228,15 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
             <div className="d-flex flex-row mb-3 mt-3 justify-content-center justify-content-lg-start">
               {product.sizesData ? (
                 product.sizesData.map((data) => (
-                  <div onClick={ () => {setSizesMapData(data)}} key={data} className={"p-2" + (sizesMapData === data ? " underlineYellow" : "")}>
+                  <div
+                    onClick={() => {
+                      setSizesMapData(data);
+                    }}
+                    key={data}
+                    className={
+                      "p-2" + (sizesMapData === data ? " underlineYellow" : "")
+                    }
+                  >
                     {data}
                   </div>
                 ))
@@ -231,12 +248,13 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
           <div>
             <StyledButton
               onClick={() => {
-                handleShow()
-                product.sizeSelected = sizesMapData
-                product.colorSelected = colorSelected
-                product.imageSelected = colorImageSelected
+                handleShow();
+                product.sizeSelected = sizesMapData;
+                product.colorSelected = colorSelected;
+                product.imageSelected = colorImageSelected;
+                product.indexInternal = getCartId(3000)
                 console.log(product);
-                onAdd(product)
+                onAdd(product);
               }}
               variant="light"
               size="lg"
@@ -253,22 +271,72 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
       </Row>
 
       <Offcanvas placement="end" show={show} onHide={handleClose}>
-        <Offcanvas.Body>
-          {cartItems.map((item, index) => (
-            <Row key={index}>
-              <Col xs={3} lg={3}>
-                <Image 
-                fluid={true}
-                src={item.imageSelected}
-                />
-              </Col>
-              <div>{item.name}</div>
-            <div>{item.qty}</div>
-            <div>{item.colorSelected}</div>
-            <div>{item.sizeSelected}</div>
-            </Row>
-          ))}
+        <Offcanvas.Body className="px-4">
+          <div style={{ marginTop: "7vh" }}>
+            <div className="fw-bold fs-4 mb-5">Your Cart</div>
+            {cartItems.map((item, index) => (
+              <Row key={index}>
+                <Col xs={3} lg={3}>
+                  <a
+                    href={"/collections/" + item.collectionid + "/" + item._id}
+                  >
+                    <Image
+                      fluid={true}
+                      src={item.imageSelected}
+                      alt={item.name}
+                      className="d-block mx-auto"
+                    />
+                  </a>
+                </Col>
+                <Col xs={9} lg={9}>
+                  <div className="d-flex justify-content-between">
+                    <div>
+                      <a
+                        className="text-decoration-none text-dark fw-bold"
+                        href={
+                          "/collections/" + item.collectionid + "/" + item._id
+                        }
+                      >
+                        <div>
+                          {item.name}({item.colorSelected} / {item.sizeSelected}
+                          )
+                        </div>
+                      </a>
+                      <div>
+                        <div>{item.weight} Kg</div>
+                      </div>
+                    </div>
+                    <div>
+                      <AiOutlineClose onClick={() => onRemove(item)} />
+                    </div>
+                  </div>
+                  <div className="d-flex justify-content-between py-4">
+                    <div>Quantity: {item.qty}</div>
+                    <div>{item.qty * item.price} €</div>
+                  </div>
+                </Col>
+                <hr />
+              </Row>
+            ))}
+            <div className="d-flex justify-content-between fw-bold my-3">
+              <div>Subtotal</div>
+              <div>{subtotalPrice.toFixed(2)} €</div>
+            </div>
+            <div className="d-flex justify-content-between my-3">
+              <div>Tax (21%)</div>
+              <div>{taxPrice.toFixed(2)} €</div>
+            </div>
+            <div className="d-flex justify-content-between my-3">
+              <div>Total</div>
+              <div>{TotalPrice.toFixed(2)} €</div>
+            </div>
+          </div>
         </Offcanvas.Body>
+        <div className="px-2 my-4">
+          <StyledButton as={Link} to="/shop/cart" variant="light" size="lg" className="btn py-3 w-100 fw-bold">
+            View Cart
+          </StyledButton>
+        </div>
       </Offcanvas>
     </Container>
   );

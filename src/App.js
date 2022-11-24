@@ -51,15 +51,22 @@ function App() {
   };
 
   const onRemove = (product) => {
-    const exist = cartItems.find((x) => x._id === product._id);
+    const exist = cartItems.find((x) => x._id === product._id &&
+    x.sizeSelected === product.sizeSelected &&
+    x.colorSelected === product.colorSelected &&
+    x.imageSelected === product.imageSelected);
     if (exist.qty === 1) {
-      const newCartItems = cartItems.filter((x) => x._id !== product._id);
-      setCartItems(newCartItems);
+      const newCartItems = cartItems.filter((x) => x.indexInternal !== product.indexInternal)
+      setCartItems(newCartItems)
     } else {
-      const newCartItems = cartItems.map((x) =>
-        x._id === product._id ? { ...exist, qty: exist.qty - 1 } : x
-      );
-      setCartItems(newCartItems);
+      setCartItems(
+        cartItems.map((x) =>
+        x._id === product._id &&
+        x.sizeSelected === product.sizeSelected &&
+        x.colorSelected === product.colorSelected &&
+        x.imageSelected === product.imageSelected ? {...exist, qty: exist.qty - 1 } : x
+        )
+      )
     }
   };
 

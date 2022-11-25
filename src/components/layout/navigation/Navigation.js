@@ -8,8 +8,9 @@ import { StyledLinkNavbar } from "./StyledLinkNavbar";
 import { StyledNavbar } from "./StyledNavbar";
 import { StyledOffcanvasHeader } from "./StyledOffcanvasHeader";
 import "./Navigation.css";
+import NavigationCollectionMap from "./NavigationCollectionMap";
 
-const Navigation = ({ countCartItems }) => {
+const Navigation = ({ countCartItems, collections }) => {
   const location = useLocation();
   const [url, SetUrl] = useState(null);
   useEffect(() => {
@@ -42,84 +43,9 @@ const Navigation = ({ countCartItems }) => {
                     Home
                   </Nav.Link>
                   <div className="lh-1 mt-4">
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/the-brotherhood-collection"
-                      href="/collections/the-brotherhood-collection"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/the-brotherhood-collection"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      THE BROTHERHOOD COLLETION
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/originals"
-                      href="/collections/originals"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/originals"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      OG's
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/original-gangsters-collection"
-                      href="/collections/original-gangsters-collection"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/original-gangsters-collection"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      ORIGINAL GANSTERS COLLECTION
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/basado-collection"
-                      href="/collections/basado-collection"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/basado-collection"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      BASADO COLLECTION
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/ogs"
-                      href="/collections/ogs"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/ogs"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      GOLD - LAST DAYS!
-                    </Nav.Link>
-                    <Nav.Link
-                      as={NavLink}
-                      to="/collections/accessories"
-                      href="/collections/accessories"
-                      className={
-                        "text-dark hoverLink" +
-                        (url === "/collections/accessories"
-                          ? " text-decoration-underline"
-                          : "")
-                      }
-                    >
-                      ACCESSORIES
-                    </Nav.Link>
+                    {collections.map((collection) => (
+                      <NavigationCollectionMap key={collection._id} collection={collection} url={url} />
+                    ))}
                   </div>
                   <Nav.Link
                     as={NavLink}

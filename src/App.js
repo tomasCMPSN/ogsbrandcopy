@@ -110,7 +110,7 @@ function App() {
     <div>
       <GlobalFonts />
       <BrowserRouter>
-        <Navigation countCartItems={cartItems.length} />
+        <Navigation countCartItems={cartItems.length} collections={collections} />
         <main>
           <Routes>
             <Route path="/" element={<Home homeData={homeData} />} />

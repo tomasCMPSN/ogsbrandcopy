@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Badge, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { AiOutlineShopping } from "react-icons/ai";
 import { MdAdminPanelSettings } from "react-icons/md"
 import { NavLink, useLocation } from "react-router-dom";
@@ -154,7 +154,7 @@ const Navigation = ({ countCartItems }) => {
             </NavLink>
             <StyledLinkNavbar className="me-5" to="/shop/cart">
               Cart
-              {countCartItems ? ( <p>{countCartItems}</p> ) : ("")}
+              {countCartItems ? ( <Badge className="ms-1"  bg="danger">{countCartItems}</Badge> ) : ("")}
             </StyledLinkNavbar>
           </div>
         </Container>

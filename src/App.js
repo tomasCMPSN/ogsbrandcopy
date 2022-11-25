@@ -38,10 +38,12 @@ function App() {
     if (exist) {
       setCartItems(
         cartItems.map((x) =>
-        x._id === product._id &&
-        x.sizeSelected === product.sizeSelected &&
-        x.colorSelected === product.colorSelected &&
-        x.imageSelected === product.imageSelected ? { ...exist, qty: exist.qty + 1 } : x
+          x._id === product._id &&
+          x.sizeSelected === product.sizeSelected &&
+          x.colorSelected === product.colorSelected &&
+          x.imageSelected === product.imageSelected
+            ? { ...exist, qty: exist.qty + 1 }
+            : x
         )
       );
     } else {
@@ -51,24 +53,35 @@ function App() {
   };
 
   const onRemove = (product) => {
-    const exist = cartItems.find((x) => x._id === product._id &&
-    x.sizeSelected === product.sizeSelected &&
-    x.colorSelected === product.colorSelected &&
-    x.imageSelected === product.imageSelected);
-    if (exist.qty === 1) {
-      const newCartItems = cartItems.filter((x) => x.indexInternal !== product.indexInternal)
-      setCartItems(newCartItems)
-    } else {
-      setCartItems(
-        cartItems.map((x) =>
+    const exist = cartItems.find(
+      (x) =>
         x._id === product._id &&
         x.sizeSelected === product.sizeSelected &&
         x.colorSelected === product.colorSelected &&
-        x.imageSelected === product.imageSelected ? {...exist, qty: exist.qty - 1 } : x
+        x.imageSelected === product.imageSelected
+    );
+    if (exist.qty === 1) {
+      const newCartItems = cartItems.filter(
+        (x) => x.indexInternal !== product.indexInternal
+      );
+      setCartItems(newCartItems);
+    } else {
+      setCartItems(
+        cartItems.map((x) =>
+          x._id === product._id &&
+          x.sizeSelected === product.sizeSelected &&
+          x.colorSelected === product.colorSelected &&
+          x.imageSelected === product.imageSelected
+            ? { ...exist, qty: exist.qty - 1 }
+            : x
         )
-      )
+      );
     }
   };
+
+  const subtotalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
+  const taxPrice = subtotalPrice * 0.21;
+  const totalPrice = subtotalPrice + taxPrice;
 
   useEffect(() => {
     getAPI();
@@ -101,7 +114,19 @@ function App() {
         <main>
           <Routes>
             <Route path="/" element={<Home homeData={homeData} />} />
-            <Route path="/shop/cart" element={<Cart />} />
+            <Route
+              path="/shop/cart"
+              element={
+                <Cart
+                  subtotalPrice={subtotalPrice}
+                  taxPrice={taxPrice}
+                  totalPrice={totalPrice}
+                  cartItems={cartItems}
+                  onRemove={onRemove}
+                  countCartItems={cartItems.length}
+                />
+              }
+            />
             <Route
               path="/collections"
               element={<AllCollections products={products} />}
@@ -119,6 +144,9 @@ function App() {
               path="/collections/:id/:id"
               element={
                 <Product
+                  subtotalPrice={subtotalPrice}
+                  taxPrice={taxPrice}
+                  totalPrice={totalPrice}
                   cartItems={cartItems}
                   onAdd={onAdd}
                   onRemove={onRemove}

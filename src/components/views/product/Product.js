@@ -7,12 +7,12 @@ import {
   Offcanvas,
   Row,
 } from "react-bootstrap";
-import { AiOutlineClose } from "react-icons/ai";
 import { Link, useParams } from "react-router-dom";
 import { StyledButton } from "./StyledButton";
 import "./Product.css";
+import CartItemsMap from "./CartItemsMap";
 
-const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
+const Product = ({ cartItems, URLProducts, onAdd, onRemove, subtotalPrice, taxPrice, totalPrice }) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
@@ -20,10 +20,6 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
 
   const [colorSelected, setColorSelected] = useState("");
   const [colorImageSelected, setColorImageSelected] = useState("");
-
-  const subtotalPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
-  const taxPrice = subtotalPrice * 0.21;
-  const TotalPrice = subtotalPrice + taxPrice;
 
   function getCartId(max) {
     return Math.floor(Math.random() * max);
@@ -275,48 +271,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
           <div style={{ marginTop: "7vh" }}>
             <div className="fw-bold fs-4 mb-5">Your Cart</div>
             {cartItems.map((item, index) => (
-              <Row key={index}>
-                <Col xs={3} lg={3}>
-                  <a
-                    href={"/collections/" + item.collectionid + "/" + item._id}
-                  >
-                    <Image
-                      fluid={true}
-                      src={item.imageSelected}
-                      alt={item.name}
-                      className="d-block mx-auto"
-                    />
-                  </a>
-                </Col>
-                <Col xs={9} lg={9}>
-                  <div className="d-flex justify-content-between">
-                    <div>
-                      <a
-                        className="text-decoration-none text-dark fw-bold"
-                        href={
-                          "/collections/" + item.collectionid + "/" + item._id
-                        }
-                      >
-                        <div>
-                          {item.name}({item.colorSelected} / {item.sizeSelected}
-                          )
-                        </div>
-                      </a>
-                      <div>
-                        <div>{item.weight} Kg</div>
-                      </div>
-                    </div>
-                    <div>
-                      <AiOutlineClose onClick={() => onRemove(item)} />
-                    </div>
-                  </div>
-                  <div className="d-flex justify-content-between py-4">
-                    <div>Quantity: {item.qty}</div>
-                    <div>{item.qty * item.price} €</div>
-                  </div>
-                </Col>
-                <hr />
-              </Row>
+              <CartItemsMap key={index} item={item} onRemove={onRemove} />
             ))}
             <div className="d-flex justify-content-between fw-bold my-3">
               <div>Subtotal</div>
@@ -328,7 +283,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove }) => {
             </div>
             <div className="d-flex justify-content-between my-3">
               <div>Total</div>
-              <div>{TotalPrice.toFixed(2)} €</div>
+              <div>{totalPrice.toFixed(2)} €</div>
             </div>
           </div>
         </Offcanvas.Body>

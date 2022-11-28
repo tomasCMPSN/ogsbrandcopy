@@ -12,7 +12,15 @@ import { StyledButton } from "./StyledButton";
 import "./Product.css";
 import CartItemsMap from "./CartItemsMap";
 
-const Product = ({ cartItems, URLProducts, onAdd, onRemove, subtotalPrice, taxPrice, totalPrice }) => {
+const Product = ({
+  cartItems,
+  URLProducts,
+  onAdd,
+  onRemove,
+  subtotalPrice,
+  taxPrice,
+  totalPrice,
+}) => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
 
@@ -248,7 +256,7 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove, subtotalPrice, taxPr
                 product.sizeSelected = sizesMapData;
                 product.colorSelected = colorSelected;
                 product.imageSelected = colorImageSelected;
-                product.indexInternal = getCartId(3000)
+                product.indexInternal = getCartId(3000);
                 console.log(product);
                 onAdd(product);
               }}
@@ -288,7 +296,13 @@ const Product = ({ cartItems, URLProducts, onAdd, onRemove, subtotalPrice, taxPr
           </div>
         </Offcanvas.Body>
         <div className="px-2 my-4">
-          <StyledButton as={Link} to="/shop/cart" variant="light" size="lg" className="btn py-3 w-100 fw-bold">
+          <StyledButton
+            as={Link}
+            to="/shop/cart"
+            variant="light"
+            size="lg"
+            className="btn py-3 w-100 fw-bold"
+          >
             View Cart
           </StyledButton>
         </div>

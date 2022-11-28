@@ -3,7 +3,7 @@ import { Col, Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const AllCollectionsGrid = ({ product }) => {
-  console.log(product);
+  // console.log(product);
   return (
     <Col xs={6} lg={3} className="pb-3 pb-lg-5">
       <Link className="text-dark" style={{ textDecoration: "none" }} to={"/collections/" + product.collectionid + "/" + product._id}>

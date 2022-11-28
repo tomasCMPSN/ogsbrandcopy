@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import { Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import CollectionsGrid from "../CollectionsGrid";
-import  useData  from "../useData"
+import  useData  from "./useData"
 
 const Collection = ({ URLProducts, URLCollections }) => {
   const { id } = useParams();

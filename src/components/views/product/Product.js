@@ -11,6 +11,7 @@ import { Link, useParams } from "react-router-dom";
 import { StyledButton } from "./StyledButton";
 import "./Product.css";
 import CartItemsMap from "./CartItemsMap";
+import useDataProducts from "./useDataProducts";
 
 const Product = ({
   cartItems,
@@ -21,19 +22,21 @@ const Product = ({
   taxPrice,
   totalPrice,
 }) => {
-  const [product, setProduct] = useState({});
   const { id } = useParams();
+  const [dataProduct, sizesData, colorData, imageData] = useDataProducts(
+    URLProducts,
+    id
+  );
+  console.log(dataProduct);
 
-  const [sizesMapData, setSizesMapData] = useState("");
-
+  const [sizesMapData, setSizesMapData] = useState(sizesData);
   const [colorSelected, setColorSelected] = useState("");
   const [colorImageSelected, setColorImageSelected] = useState("");
+  console.log(sizesMapData);
 
   function getCartId(max) {
     return Math.floor(Math.random() * max);
   }
-
-  console.log(sizesMapData);
 
   const [show, setShow] = useState(false);
 
@@ -52,70 +55,66 @@ const Product = ({
   const dataColor2 = [];
   const dataColor3 = [];
 
-  if (product.color1Img1 !== "") {
-    dataColor1.push(product.color1Img1);
+  if (dataProduct.color1Img1 !== "") {
+    dataColor1.push(dataProduct.color1Img1);
   }
-  if (product.color1Img2 !== "") {
-    dataColor1.push(product.color1Img2);
+  if (dataProduct.color1Img2 !== "") {
+    dataColor1.push(dataProduct.color1Img2);
   }
-  if (product.color1Img3 !== "") {
-    dataColor1.push(product.color1Img3);
+  if (dataProduct.color1Img3 !== "") {
+    dataColor1.push(dataProduct.color1Img3);
   }
-  if (product.color1Img4 !== "") {
-    dataColor1.push(product.color1Img4);
+  if (dataProduct.color1Img4 !== "") {
+    dataColor1.push(dataProduct.color1Img4);
   }
-  if (product.color1Img5 !== "") {
-    dataColor1.push(product.color1Img5);
+  if (dataProduct.color1Img5 !== "") {
+    dataColor1.push(dataProduct.color1Img5);
   }
-  if (product.color2Img1 !== "") {
-    dataColor2.push(product.color2Img1);
+  if (dataProduct.color2Img1 !== "") {
+    dataColor2.push(dataProduct.color2Img1);
   }
-  if (product.color2Img2 !== "") {
-    dataColor2.push(product.color2Img2);
+  if (dataProduct.color2Img2 !== "") {
+    dataColor2.push(dataProduct.color2Img2);
   }
-  if (product.color2Img3 !== "") {
-    dataColor2.push(product.color2Img3);
+  if (dataProduct.color2Img3 !== "") {
+    dataColor2.push(dataProduct.color2Img3);
   }
-  if (product.color2Img4 !== "") {
-    dataColor2.push(product.color2Img4);
+  if (dataProduct.color2Img4 !== "") {
+    dataColor2.push(dataProduct.color2Img4);
   }
-  if (product.color2Img5 !== "") {
-    dataColor2.push(product.color2Img5);
+  if (dataProduct.color2Img5 !== "") {
+    dataColor2.push(dataProduct.color2Img5);
   }
-  if (product.color3Img1 !== "") {
-    dataColor3.push(product.color3Img1);
+  if (dataProduct.color3Img1 !== "") {
+    dataColor3.push(dataProduct.color3Img1);
   }
-  if (product.color3Img2 !== "") {
-    dataColor3.push(product.color3Img2);
+  if (dataProduct.color3Img2 !== "") {
+    dataColor3.push(dataProduct.color3Img2);
   }
-  if (product.color3Img3 !== "") {
-    dataColor3.push(product.color3Img3);
+  if (dataProduct.color3Img3 !== "") {
+    dataColor3.push(dataProduct.color3Img3);
   }
-  if (product.color3Img4 !== "") {
-    dataColor3.push(product.color3Img4);
+  if (dataProduct.color3Img4 !== "") {
+    dataColor3.push(dataProduct.color3Img4);
   }
-  if (product.color3Img5 !== "") {
-    dataColor3.push(product.color3Img5);
+  if (dataProduct.color3Img5 !== "") {
+    dataColor3.push(dataProduct.color3Img5);
   }
 
   const [dataColor, setDataColor] = useState(1);
 
   useEffect(() => {
-    async function fetchData() {
+    function fetchData() {
       try {
-        const res = await fetch(`${URLProducts}${id}/get`);
-        const productApi = await res.json();
-        setProduct(productApi);
-        console.log(productApi);
-        setSizesMapData(productApi.sizesData[0]);
-        setColorSelected(productApi.color1Name);
-        setColorImageSelected(productApi.color1Img1);
+        setSizesMapData(sizesData);
+        setColorSelected(colorData);
+        setColorImageSelected(imageData);
       } catch (error) {
         console.log(error);
       }
     }
     fetchData();
-  }, []);
+  }, [id, sizesData, colorData, imageData]);
 
   return (
     <Container style={{ marginTop: "16vh" }}>
@@ -166,63 +165,63 @@ const Product = ({
         </Col>
         <Col className="mt-1 mt-lg-5" xs={12} lg={3}>
           <div className="mt-1 mt-lg-5">
-            <p className="fs-2 fw-bold">{product.name}</p>
+            <p className="fs-2 fw-bold">{dataProduct.name}</p>
           </div>
           <div>
-            <p>{product.price} €</p>
+            <p>{dataProduct.price} €</p>
           </div>
           <Row>
-            {product.colors !== 1 && (
+            {dataProduct.colors !== 1 && (
               <Col xs={3} lg={3}>
                 <Image
                   onClick={() => {
                     setDataColor(1);
-                    setColorImageSelected(product.color1Img1);
-                    setColorSelected(product.color1Name);
-                    console.log(product.color1Name);
+                    setColorImageSelected(dataProduct.color1Img1);
+                    setColorSelected(dataProduct.color1Name);
+                    console.log(dataProduct.color1Name);
                     setImageIndex(0);
                   }}
                   fluid={true}
-                  src={product.color1Img1}
-                  alt={product.name}
+                  src={dataProduct.color1Img1}
+                  alt={dataProduct.name}
                   className={
                     "d-block mx-auto" + (dataColor === 1 ? " opacity-50" : "")
                   }
                 />
               </Col>
             )}
-            {product.colors > 1 && (
+            {dataProduct.colors > 1 && (
               <Col xs={3} lg={3}>
                 <Image
                   onClick={() => {
                     setDataColor(2);
-                    setColorImageSelected(product.color2Img1);
-                    setColorSelected(product.color2Name);
-                    console.log(product.color2Name);
+                    setColorImageSelected(dataProduct.color2Img1);
+                    setColorSelected(dataProduct.color2Name);
+                    console.log(dataProduct.color2Name);
                     setImageIndex(0);
                   }}
                   fluid={true}
-                  src={product.color2Img1}
-                  alt={product.name}
+                  src={dataProduct.color2Img1}
+                  alt={dataProduct.name}
                   className={
                     "d-block mx-auto" + (dataColor === 2 ? " opacity-50" : "")
                   }
                 />
               </Col>
             )}
-            {product.colors === 3 && (
+            {dataProduct.colors === 3 && (
               <Col xs={3} lg={3}>
                 <Image
                   onClick={() => {
                     setDataColor(3);
-                    setColorImageSelected(product.color3Img1);
-                    setColorSelected(product.color3Name);
-                    console.log(product.color3Name);
+                    setColorImageSelected(dataProduct.color3Img1);
+                    setColorSelected(dataProduct.color3Name);
+                    console.log(dataProduct.color3Name);
                     setImageIndex(0);
                   }}
                   fluid={true}
-                  src={product.color3Img1}
-                  alt={product.name}
+                  src={dataProduct.color3Img1}
+                  alt={dataProduct.name}
                   className={
                     "d-block mx-auto" + (dataColor === 3 ? " opacity-50" : "")
                   }
@@ -230,8 +229,8 @@ const Product = ({
               </Col>
             )}
             <div className="d-flex flex-row mb-3 mt-3 justify-content-center justify-content-lg-start">
-              {product.sizesData ? (
-                product.sizesData.map((data) => (
+              {dataProduct.sizesData ? (
+                dataProduct.sizesData.map((data) => (
                   <div
                     onClick={() => {
                       setSizesMapData(data);
@@ -253,12 +252,12 @@ const Product = ({
             <StyledButton
               onClick={() => {
                 handleShow();
-                product.sizeSelected = sizesMapData;
-                product.colorSelected = colorSelected;
-                product.imageSelected = colorImageSelected;
-                product.indexInternal = getCartId(3000);
-                console.log(product);
-                onAdd(product);
+                dataProduct.sizeSelected = sizesMapData;
+                dataProduct.colorSelected = colorSelected;
+                dataProduct.imageSelected = colorImageSelected;
+                dataProduct.indexInternal = getCartId(3000);
+                console.log(dataProduct);
+                onAdd(dataProduct);
               }}
               variant="light"
               size="lg"
@@ -269,7 +268,7 @@ const Product = ({
           </div>
           <hr className="mb-5" />
           <div>
-            <p>{product.description}</p>
+            <p>{dataProduct.description}</p>
           </div>
         </Col>
       </Row>
@@ -279,7 +278,12 @@ const Product = ({
           <div style={{ marginTop: "7vh" }}>
             <div className="fw-bold fs-4 mb-5">Your Cart</div>
             {cartItems.map((item, index) => (
-              <CartItemsMap key={index} item={item} onRemove={onRemove} />
+              <CartItemsMap
+                key={index}
+                item={item}
+                onRemove={onRemove}
+                handleClose={handleClose}
+              />
             ))}
             <div className="d-flex justify-content-between fw-bold my-3">
               <div>Subtotal</div>

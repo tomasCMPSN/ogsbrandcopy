@@ -12,6 +12,8 @@ import { StyledButton } from "./StyledButton";
 import "./Product.css";
 import CartItemsMap from "./CartItemsMap";
 import useDataProducts from "./useDataProducts";
+import InnerImageZoom from "react-inner-image-zoom";
+import "react-inner-image-zoom/lib/InnerImageZoom/styles.min.css";
 
 const Product = ({
   cartItems,
@@ -157,13 +159,31 @@ const Product = ({
             >
               {dataColor1.map((data, index) => (
                 <Carousel.Item key={index}>
-                  <img className="d-block w-100" src={data} alt={data} />
+                  {/* <img className="d-block w-100" src={data} alt={data} /> */}
+                  <div className="text-center d-block w-100">
+                    <InnerImageZoom
+                      zoomPreload={true}
+                      height={1200}
+                      width={1000}
+                      hasSpacer={true}
+                      hideCloseButton={true}
+                      src={
+                        data === undefined
+                          ? "https://media.istockphoto.com/id/1335247217/vector/loading-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=jARr4Alv-d5U3bCa8eixuX2593e1rDiiWnvJLgHCkQM="
+                          : data
+                      }
+                      hideHint={true}
+                      zoomScale={3.5}
+                      zoomType="hover"
+                      zoomSrc={data}
+                    />
+                  </div>
                 </Carousel.Item>
               ))}
             </Carousel>
           )}
         </Col>
-        <Col className="mt-1 mt-lg-5" xs={12} lg={3}>
+        <Col className="mt-1 mt-lg-2" xs={12} lg={3}>
           <div className="mt-1 mt-lg-5">
             <p className="fs-2 fw-bold">{dataProduct.name}</p>
           </div>

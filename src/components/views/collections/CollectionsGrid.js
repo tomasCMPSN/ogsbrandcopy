@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 const CollectionsGrid = ({ product }) => {
   const [image, setImage] = useState(product.color1Img1);
 
-  // console.log(product);
   return (
     <Col
       onMouseOver={() => {

@@ -36,18 +36,20 @@ function App() {
         x.imageSelected === product.imageSelected
     );
     if (exist) {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id &&
-          x.sizeSelected === product.sizeSelected &&
-          x.colorSelected === product.colorSelected &&
-          x.imageSelected === product.imageSelected
-            ? { ...exist, qty: exist.qty + 1 }
-            : x
-        )
+      const newCartItems = cartItems.map((x) =>
+        x._id === product._id &&
+        x.sizeSelected === product.sizeSelected &&
+        x.colorSelected === product.colorSelected &&
+        x.imageSelected === product.imageSelected
+          ? { ...exist, qty: exist.qty + 1 }
+          : x
       );
+      setCartItems(newCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
     } else {
-      setCartItems([...cartItems, { ...product, qty: 1 }]);
+      const newCartItems = [...cartItems, { ...product, qty: 1 }];
+      setCartItems(newCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
     }
     console.log(cartItems);
   };
@@ -65,17 +67,18 @@ function App() {
         (x) => x.indexInternal !== product.indexInternal
       );
       setCartItems(newCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
     } else {
-      setCartItems(
-        cartItems.map((x) =>
-          x._id === product._id &&
-          x.sizeSelected === product.sizeSelected &&
-          x.colorSelected === product.colorSelected &&
-          x.imageSelected === product.imageSelected
-            ? { ...exist, qty: exist.qty - 1 }
-            : x
-        )
+      const newCartItems = cartItems.map((x) =>
+        x._id === product._id &&
+        x.sizeSelected === product.sizeSelected &&
+        x.colorSelected === product.colorSelected &&
+        x.imageSelected === product.imageSelected
+          ? { ...exist, qty: exist.qty - 1 }
+          : x
       );
+      setCartItems(newCartItems);
+      localStorage.setItem("cartItems", JSON.stringify(newCartItems));
     }
   };
 
@@ -84,6 +87,11 @@ function App() {
   const totalPrice = subtotalPrice + taxPrice;
 
   useEffect(() => {
+    setCartItems(
+      localStorage.getItem("cartItems")
+        ? JSON.parse(localStorage.getItem("cartItems"))
+        : []
+    );
     getAPI();
   }, []);
 
@@ -110,7 +118,10 @@ function App() {
     <div>
       <GlobalFonts />
       <BrowserRouter>
-        <Navigation countCartItems={cartItems.length} collections={collections} />
+        <Navigation
+          countCartItems={cartItems.length}
+          collections={collections}
+        />
         <main>
           <Routes>
             <Route path="/" element={<Home homeData={homeData} />} />

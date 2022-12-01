@@ -159,7 +159,6 @@ const Product = ({
             >
               {dataColor1.map((data, index) => (
                 <Carousel.Item key={index}>
-                  {/* <img className="d-block w-100" src={data} alt={data} /> */}
                   <div className="text-center d-block w-100">
                     <InnerImageZoom
                       zoomPreload={true}

@@ -14,7 +14,7 @@ const CollectionsGrid = ({ product }) => {
         }
       }}
       onMouseOut={() => {
-        setImage(product.color1Img1)
+        setImage(product.color1Img1);
       }}
       xs={6}
       lg={3}
@@ -27,7 +27,11 @@ const CollectionsGrid = ({ product }) => {
       >
         <Image
           fluid={true}
-          src={image}
+          src={
+            image === undefined
+              ? "https://media.istockphoto.com/id/1335247217/vector/loading-icon-vector-illustration.jpg?s=612x612&w=0&k=20&c=jARr4Alv-d5U3bCa8eixuX2593e1rDiiWnvJLgHCkQM="
+              : image
+          }
           alt={product.name}
           className="d-block mx-auto"
         />

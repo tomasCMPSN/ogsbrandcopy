@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import GlobalFonts from "./fonts/fonts";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Navigation from "./components/layout/navigation/Navigation";
 import Cart from "./components/views/cart/Cart";
 import Home from "./components/views/home/Home";
@@ -16,6 +16,11 @@ import HomeDataCreate from "./components/views/admin/homeDataCreate/HomeDataCrea
 import AllCollections from "./components/views/collections/AllCollections/AllCollections";
 import Collection from "./components/views/collections/Collection/Collection";
 import Product from "./components/views/product/Product";
+import Login from "./components/views/auth/login/Login";
+import ResetPassword from "./components/views/auth/resetPassword/ResetPassword";
+import Signup from "./components/views/auth/signup/Signup";
+import Account from "./components/views/account/Account";
+import { useAuthContext } from "./context/useAuthContext";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -25,6 +30,14 @@ function App() {
   const URLCollections = process.env.REACT_APP_API_COLLECTIONS;
   const URLProducts = process.env.REACT_APP_API_PRODUCTS;
   const URLHomeData = process.env.REACT_APP_API_HOMEDATA;
+
+  const AdminUser = process.env.REACT_APP_ADMIN;
+
+  const { user } = useAuthContext();
+
+  const [adminStatus, setAdminStatus] = useState(false);
+
+  console.log(adminStatus);
 
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (product) => {
@@ -93,7 +106,13 @@ function App() {
         : []
     );
     getAPI();
-  }, []);
+
+    if (user !== null && user.email === AdminUser) {
+      setAdminStatus(true);
+    } else {
+      setAdminStatus(false);
+    }
+  }, [user]);
 
   const getAPI = async () => {
     try {
@@ -121,6 +140,7 @@ function App() {
         <Navigation
           countCartItems={cartItems.length}
           collections={collections}
+          adminStatus={adminStatus}
         />
         <main>
           <Routes>
@@ -168,75 +188,107 @@ function App() {
             <Route
               path="/admin"
               element={
-                <Admin
-                  URLCollections={URLCollections}
-                  URLProducts={URLProducts}
-                  URLHomeData={URLHomeData}
-                  homeData={homeData}
-                  collections={collections}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <Admin
+                    URLCollections={URLCollections}
+                    URLProducts={URLProducts}
+                    URLHomeData={URLHomeData}
+                    homeData={homeData}
+                    collections={collections}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
             <Route
               path="/admin/create"
               element={
-                <CollectionsCreate
-                  URLCollections={URLCollections}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <CollectionsCreate
+                    URLCollections={URLCollections}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
             <Route
               path="/admin/:id/create"
               element={
-                <CollectionsProductCreate
-                  URLCollections={URLCollections}
-                  URLProducts={URLProducts}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <CollectionsProductCreate
+                    URLCollections={URLCollections}
+                    URLProducts={URLProducts}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
             <Route
               path="/admin/create/homedata"
               element={
-                <HomeDataCreate
-                  collections={collections}
-                  URLCollections={URLCollections}
-                  URLHomeData={URLHomeData}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <HomeDataCreate
+                    collections={collections}
+                    URLCollections={URLCollections}
+                    URLHomeData={URLHomeData}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
             <Route
               path="/admin/update/:id"
               element={
-                <CollectionsUpdate
-                  URLCollections={URLCollections}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <CollectionsUpdate
+                    URLCollections={URLCollections}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
             <Route
               path="/admin/update/products/:id"
               element={
-                <CollectionsProductUpdate
-                  URLProducts={URLProducts}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <CollectionsProductUpdate
+                    URLProducts={URLProducts}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
             <Route
               path="/admin/update/homedata/:id"
               element={
-                <HomeDataUpdate
-                  URLCollections={URLCollections}
-                  URLHomeData={URLHomeData}
-                  collections={collections}
-                  getAPI={getAPI}
-                />
+                adminStatus === true ? (
+                  <HomeDataUpdate
+                    URLCollections={URLCollections}
+                    URLHomeData={URLHomeData}
+                    collections={collections}
+                    getAPI={getAPI}
+                  />
+                ) : (
+                  <Navigate to="/" />
+                )
               }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/resetPassword" element={<ResetPassword />} />
+            <Route path="/account" element={<Account />} />
             <Route path="*" element={<Error404 />} />
           </Routes>
         </main>

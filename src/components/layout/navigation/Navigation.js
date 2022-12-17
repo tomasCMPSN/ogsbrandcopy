@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Badge, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { AiOutlineShopping } from "react-icons/ai";
-import { MdAdminPanelSettings } from "react-icons/md"
+import { MdAdminPanelSettings, MdOutlinePersonOutline } from "react-icons/md";
 import { NavLink, useLocation } from "react-router-dom";
 import { ImgNavbar } from "./ImgNavbar";
 import { StyledLinkNavbar } from "./StyledLinkNavbar";
@@ -9,13 +9,16 @@ import { StyledNavbar } from "./StyledNavbar";
 import { StyledOffcanvasHeader } from "./StyledOffcanvasHeader";
 import "./Navigation.css";
 import NavigationCollectionMap from "./NavigationCollectionMap";
+import { useAuthContext } from "../../../context/useAuthContext";
 
-const Navigation = ({ countCartItems, collections }) => {
+const Navigation = ({ countCartItems, collections, adminStatus }) => {
+  const { user } = useAuthContext();
+
   const location = useLocation();
-  const [url, SetUrl] = useState(null);
+  const [url, setUrl] = useState(null);
   useEffect(() => {
-    SetUrl(location.pathname);
-  }, [location]);
+    setUrl(location.pathname);
+  }, [location, user]);
 
   return (
     <div>
@@ -44,7 +47,11 @@ const Navigation = ({ countCartItems, collections }) => {
                   </Nav.Link>
                   <div className="lh-1 mt-4">
                     {collections.map((collection) => (
-                      <NavigationCollectionMap key={collection._id} collection={collection} url={url} />
+                      <NavigationCollectionMap
+                        key={collection._id}
+                        collection={collection}
+                        url={url}
+                      />
                     ))}
                   </div>
                   <Nav.Link
@@ -69,18 +76,42 @@ const Navigation = ({ countCartItems, collections }) => {
             </NavLink>
           </Nav>
           <div>
-            <NavLink to="/admin">
-              <MdAdminPanelSettings className="fs-4 text-dark mx-2" />
-            </NavLink>
-            <StyledLinkNavbar className="me-5" to="/admin">
+            {adminStatus === true && <NavLink to="/admin">
+                <MdAdminPanelSettings className="fs-4 text-dark mx-2" />
+              </NavLink>}
+            {adminStatus === true && <StyledLinkNavbar className="me-5" to="/admin">
               Admin
-            </StyledLinkNavbar>
+            </StyledLinkNavbar>}
+            {user === null ? (
+              <NavLink to="/login">
+                <MdOutlinePersonOutline className="fs-4 text-dark mx-2" />
+              </NavLink>
+            ) : (
+              <NavLink to="/account">
+                <MdOutlinePersonOutline className="fs-4 text-dark mx-2" />
+              </NavLink>
+            )}
+            {user === null ? (
+              <StyledLinkNavbar className="me-5" to="/login">
+                Account
+              </StyledLinkNavbar>
+            ) : (
+              <StyledLinkNavbar className="me-5" to="/account">
+                {user.email}
+              </StyledLinkNavbar>
+            )}
             <NavLink to="/shop/cart">
               <AiOutlineShopping className="fs-4 text-dark mx-2" />
             </NavLink>
             <StyledLinkNavbar className="me-5" to="/shop/cart">
               Cart
-              {countCartItems ? ( <Badge className="ms-1"  bg="danger">{countCartItems}</Badge> ) : ("")}
+              {countCartItems ? (
+                <Badge className="ms-1" bg="danger">
+                  {countCartItems}
+                </Badge>
+              ) : (
+                ""
+              )}
             </StyledLinkNavbar>
           </div>
         </Container>

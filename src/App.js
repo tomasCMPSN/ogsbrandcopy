@@ -22,6 +22,15 @@ import Signup from "./components/views/auth/signup/Signup";
 import Account from "./components/views/account/Account";
 import { useAuthContext } from "./context/useAuthContext";
 import Footer from "./components/layout/footer/Footer";
+import ShippingPolicy from "./components/views/footer/shippingPolicy/ShippingPolicy";
+import Contact from "./components/views/footer/contact/Contact";
+import PurchaseConditions from "./components/views/footer/purchaseConditions/PurchaseConditions";
+import TermsOfService from "./components/views/footer/termsOfService/TermsOfService";
+import PrivacyPolicy from "./components/views/footer/privacyPolicy/PrivacyPolicy";
+import CookiePolicy from "./components/views/footer/cookiesPolicy/CookiesPolicy";
+import Legal from "./components/views/footer/legal/Legal";
+import Sizes from "./components/views/footer/sizes/Sizes";
+import CareRecommendations from "./components/views/footer/careRecommendations/CareRecommendations";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -286,6 +295,15 @@ function App() {
                 )
               }
             />
+            <Route path="/shippingPolicy" element={<ShippingPolicy />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/purchaseConditions" element={<PurchaseConditions />} />
+            <Route path="/termsOfService" element={<TermsOfService />} />
+            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+            <Route path="/cookiesPolicy" element={<CookiePolicy />} />
+            <Route path="/legal" element={<Legal />} />
+            <Route path="/sizes" element={<Sizes />} />
+            <Route path="/careRecommendations" element={<CareRecommendations />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/resetPassword" element={<ResetPassword />} />

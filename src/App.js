@@ -21,6 +21,7 @@ import ResetPassword from "./components/views/auth/resetPassword/ResetPassword";
 import Signup from "./components/views/auth/signup/Signup";
 import Account from "./components/views/account/Account";
 import { useAuthContext } from "./context/useAuthContext";
+import Footer from "./components/layout/footer/Footer";
 
 function App() {
   const [collections, setCollections] = useState([]);
@@ -292,6 +293,7 @@ function App() {
             <Route path="*" element={<Error404 />} />
           </Routes>
         </main>
+        <Footer />
       </BrowserRouter>
     </div>
   );

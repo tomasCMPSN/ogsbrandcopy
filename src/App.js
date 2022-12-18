@@ -153,165 +153,175 @@ function App() {
           adminStatus={adminStatus}
         />
         <main>
-          <Routes>
-            <Route path="/" element={<Home homeData={homeData} />} />
-            <Route
-              path="/shop/cart"
-              element={
-                <Cart
-                  subtotalPrice={subtotalPrice}
-                  taxPrice={taxPrice}
-                  totalPrice={totalPrice}
-                  cartItems={cartItems}
-                  onRemove={onRemove}
-                  countCartItems={cartItems.length}
+          <div style={{ minHeight: "84vh" }} className="position-relative">
+            <div style={{ paddingBottom: "7rem" }}>
+              <Routes>
+                <Route path="/" element={<Home homeData={homeData} />} />
+                <Route
+                  path="/shop/cart"
+                  element={
+                    <Cart
+                      subtotalPrice={subtotalPrice}
+                      taxPrice={taxPrice}
+                      totalPrice={totalPrice}
+                      cartItems={cartItems}
+                      onRemove={onRemove}
+                      countCartItems={cartItems.length}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/collections"
-              element={<AllCollections products={products} />}
-            />
-            <Route
-              path="/collections/:id"
-              element={
-                <Collection
-                  URLProducts={URLProducts}
-                  URLCollections={URLCollections}
+                <Route
+                  path="/collections"
+                  element={<AllCollections products={products} />}
                 />
-              }
-            />
-            <Route
-              path="/collections/:id/:id"
-              element={
-                <Product
-                  subtotalPrice={subtotalPrice}
-                  taxPrice={taxPrice}
-                  totalPrice={totalPrice}
-                  cartItems={cartItems}
-                  onAdd={onAdd}
-                  onRemove={onRemove}
-                  URLProducts={URLProducts}
+                <Route
+                  path="/collections/:id"
+                  element={
+                    <Collection
+                      URLProducts={URLProducts}
+                      URLCollections={URLCollections}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/admin"
-              element={
-                adminStatus === true ? (
-                  <Admin
-                    URLCollections={URLCollections}
-                    URLProducts={URLProducts}
-                    URLHomeData={URLHomeData}
-                    homeData={homeData}
-                    collections={collections}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/admin/create"
-              element={
-                adminStatus === true ? (
-                  <CollectionsCreate
-                    URLCollections={URLCollections}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/admin/:id/create"
-              element={
-                adminStatus === true ? (
-                  <CollectionsProductCreate
-                    URLCollections={URLCollections}
-                    URLProducts={URLProducts}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/admin/create/homedata"
-              element={
-                adminStatus === true ? (
-                  <HomeDataCreate
-                    collections={collections}
-                    URLCollections={URLCollections}
-                    URLHomeData={URLHomeData}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/admin/update/:id"
-              element={
-                adminStatus === true ? (
-                  <CollectionsUpdate
-                    URLCollections={URLCollections}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/admin/update/products/:id"
-              element={
-                adminStatus === true ? (
-                  <CollectionsProductUpdate
-                    URLProducts={URLProducts}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route
-              path="/admin/update/homedata/:id"
-              element={
-                adminStatus === true ? (
-                  <HomeDataUpdate
-                    URLCollections={URLCollections}
-                    URLHomeData={URLHomeData}
-                    collections={collections}
-                    getAPI={getAPI}
-                  />
-                ) : (
-                  <Navigate to="/" />
-                )
-              }
-            />
-            <Route path="/shippingPolicy" element={<ShippingPolicy />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/purchaseConditions" element={<PurchaseConditions />} />
-            <Route path="/termsOfService" element={<TermsOfService />} />
-            <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
-            <Route path="/cookiesPolicy" element={<CookiePolicy />} />
-            <Route path="/legal" element={<Legal />} />
-            <Route path="/sizes" element={<Sizes />} />
-            <Route path="/careRecommendations" element={<CareRecommendations />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/resetPassword" element={<ResetPassword />} />
-            <Route path="/account" element={<Account />} />
-            <Route path="*" element={<Error404 />} />
-          </Routes>
+                <Route
+                  path="/collections/:id/:id"
+                  element={
+                    <Product
+                      subtotalPrice={subtotalPrice}
+                      taxPrice={taxPrice}
+                      totalPrice={totalPrice}
+                      cartItems={cartItems}
+                      onAdd={onAdd}
+                      onRemove={onRemove}
+                      URLProducts={URLProducts}
+                    />
+                  }
+                />
+                <Route
+                  path="/admin"
+                  element={
+                    adminStatus === true ? (
+                      <Admin
+                        URLCollections={URLCollections}
+                        URLProducts={URLProducts}
+                        URLHomeData={URLHomeData}
+                        homeData={homeData}
+                        collections={collections}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/admin/create"
+                  element={
+                    adminStatus === true ? (
+                      <CollectionsCreate
+                        URLCollections={URLCollections}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/admin/:id/create"
+                  element={
+                    adminStatus === true ? (
+                      <CollectionsProductCreate
+                        URLCollections={URLCollections}
+                        URLProducts={URLProducts}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/admin/create/homedata"
+                  element={
+                    adminStatus === true ? (
+                      <HomeDataCreate
+                        collections={collections}
+                        URLCollections={URLCollections}
+                        URLHomeData={URLHomeData}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/admin/update/:id"
+                  element={
+                    adminStatus === true ? (
+                      <CollectionsUpdate
+                        URLCollections={URLCollections}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/admin/update/products/:id"
+                  element={
+                    adminStatus === true ? (
+                      <CollectionsProductUpdate
+                        URLProducts={URLProducts}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route
+                  path="/admin/update/homedata/:id"
+                  element={
+                    adminStatus === true ? (
+                      <HomeDataUpdate
+                        URLCollections={URLCollections}
+                        URLHomeData={URLHomeData}
+                        collections={collections}
+                        getAPI={getAPI}
+                      />
+                    ) : (
+                      <Navigate to="/" />
+                    )
+                  }
+                />
+                <Route path="/shippingPolicy" element={<ShippingPolicy />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route
+                  path="/purchaseConditions"
+                  element={<PurchaseConditions />}
+                />
+                <Route path="/termsOfService" element={<TermsOfService />} />
+                <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
+                <Route path="/cookiesPolicy" element={<CookiePolicy />} />
+                <Route path="/legal" element={<Legal />} />
+                <Route path="/sizes" element={<Sizes />} />
+                <Route
+                  path="/careRecommendations"
+                  element={<CareRecommendations />}
+                />
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/resetPassword" element={<ResetPassword />} />
+                <Route path="/account" element={<Account />} />
+                <Route path="*" element={<Error404 />} />
+              </Routes>
+            </div>
+            <Footer />
+          </div>
         </main>
-        <Footer />
       </BrowserRouter>
     </div>
   );

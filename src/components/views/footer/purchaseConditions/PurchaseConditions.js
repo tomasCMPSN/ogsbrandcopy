@@ -218,6 +218,7 @@ const PurchaseConditions = () => {
           <a
             href="https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=ES"
             target="_blank"
+            rel="noopener noreferrer"
           >
             https://ec.europa.eu/consumers/odr/main/index.cfm?event=main.home2.show&lng=ES
           </a>

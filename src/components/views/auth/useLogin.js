@@ -6,9 +6,10 @@ export const useLogin = () => {
   const { dispatch } = useAuthContext()
 
   const login = async (email, password) => {
+    const URLLogin = process.env.REACT_APP_API_LOGIN;
     setError(null);
 
-    const response = await fetch("/apiogsbrandcopy/login", {
+    const response = await fetch(URLLogin, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

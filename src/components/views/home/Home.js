@@ -6,7 +6,7 @@ import { StyledContainerImage } from "./StyledContainerImage";
 
 const Home = ({ homeData }) => {
   if (homeData.length !== 5) {
-    return <p style={{ marginTop: "16vh" }}>Loading.</p>;
+    return <p className="fw-bold display-1" style={{ marginTop: "16vh" }}>Loading.</p>;
   }
 
   return (

@@ -4,6 +4,8 @@
 
 [Original Website](https://www.ogsbrand.com/en/)
 
+[My Copy](https://ogsbrandcopy.netlify.app/)
+
 ## Made with:
 
 * React

@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/useAuthContext";
 
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const { dispatch } = useAuthContext()
+
+  const navigate = useNavigate();
 
   const login = async (email, password) => {
     const URLLogin = process.env.REACT_APP_API_LOGIN;
@@ -23,6 +26,8 @@ export const useLogin = () => {
         localStorage.setItem('user', JSON.stringify(json))
 
         dispatch({type: 'LOGIN', payload: json})
+
+        navigate("/")
     }
   };
 

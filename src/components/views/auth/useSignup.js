@@ -1,10 +1,13 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../../context/useAuthContext";
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
-  const { dispatch } = useAuthContext()
+  const { dispatch } = useAuthContext();
   const URLSignUp = process.env.REACT_APP_API_SIGNUP;
+
+  const navigate = useNavigate();
 
   const signup = async (email, password) => {
     setError(null);
@@ -14,17 +17,19 @@ export const useSignup = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    const json = await response.json()
+    const json = await response.json();
 
     if (!response.ok) {
-        setError(json.error)
+      setError(json.error);
     }
     if (response.ok) {
-        localStorage.setItem('user', JSON.stringify(json))
+      localStorage.setItem("user", JSON.stringify(json));
 
-        dispatch({type: 'LOGIN', payload: json})
+      dispatch({ type: "LOGIN", payload: json });
+
+      navigate("/");
     }
   };
 
-  return { signup, error }
+  return { signup, error };
 };

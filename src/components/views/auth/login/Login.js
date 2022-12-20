@@ -10,15 +10,12 @@ import { useLogin } from "../useLogin";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {login, error} = useLogin()
-
-  const navigate = useNavigate()
+  const { login, error } = useLogin();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await login(email, password);
-    navigate("/")
   };
 
   return (

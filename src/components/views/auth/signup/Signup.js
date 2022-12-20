@@ -13,13 +13,12 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const { signup, error } = useSignup();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await signup(email, password);
-    navigate("/")
   };
 
   return (

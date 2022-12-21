@@ -1,10 +1,12 @@
 # OG's Brand Website Copy/ Bootstrap Default Style
 
-**I don't have the rights of OG's, i did this just for practice.**
+**I don't have the rights of OG's, I did this just for practice.**
 
 [Original Website](https://www.ogsbrand.com/en/)
 
 [My Copy](https://ogsbrandcopy.netlify.app/)
+
+If you want to try the admin page try with this user: tomascampusano.20@gmail.com / Toto1010!!
 
 ## Made with:
 

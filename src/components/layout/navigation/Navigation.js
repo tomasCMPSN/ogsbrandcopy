@@ -54,17 +54,43 @@ const Navigation = ({ countCartItems, collections, adminStatus }) => {
                       />
                     ))}
                   </div>
-                  <Nav.Link
-                    as={NavLink}
-                    to="/shop/cart"
-                    href="/shop/cart"
-                    className={
-                      "text-dark fs-5 fw-bold mt-4 hoverLink" +
-                      (url === "/shop/cart" ? " text-decoration-underline" : "")
-                    }
-                  >
-                    Cart
-                  </Nav.Link>
+                  <div className="mt-4">
+                    <Nav.Link
+                      as={NavLink}
+                      to="/shop/cart"
+                      href="/shop/cart"
+                      className={
+                        "text-dark fs-5 fw-bold hoverLink" +
+                        (url === "/shop/cart"
+                          ? " text-decoration-underline"
+                          : "")
+                      }
+                    >
+                      Cart
+                    </Nav.Link>
+                    <Nav.Link
+                      as={NavLink}
+                      to="/login"
+                      href="/login"
+                      className={
+                        "text-dark fs-5 fw-bold hoverLink" +
+                        (url === "/login" ? " text-decoration-underline" : "")
+                      }
+                    >
+                      Login
+                    </Nav.Link>
+                    <Nav.Link
+                      as={NavLink}
+                      to="/signup"
+                      href="/signup"
+                      className={
+                        "text-dark fs-5 fw-bold hoverLink" +
+                        (url === "/signup" ? " text-decoration-underline" : "")
+                      }
+                    >
+                      Register
+                    </Nav.Link>
+                  </div>
                 </Nav>
               </Offcanvas.Body>
             </Navbar.Offcanvas>
@@ -76,12 +102,16 @@ const Navigation = ({ countCartItems, collections, adminStatus }) => {
             </NavLink>
           </Nav>
           <div>
-            {adminStatus === true && <NavLink to="/admin">
+            {adminStatus === true && (
+              <NavLink to="/admin">
                 <MdAdminPanelSettings className="fs-4 text-dark mx-2" />
-              </NavLink>}
-            {adminStatus === true && <StyledLinkNavbar className="me-5" to="/admin">
-              Admin
-            </StyledLinkNavbar>}
+              </NavLink>
+            )}
+            {adminStatus === true && (
+              <StyledLinkNavbar className="me-5" to="/admin">
+                Admin
+              </StyledLinkNavbar>
+            )}
             {user === null ? (
               <NavLink to="/login">
                 <MdOutlinePersonOutline className="fs-4 text-dark mx-2" />
